@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "bntu-platform"
+version = "0.1.0"
+description = "Online platform for university services. BNTU graduation project"
+authors = ["Danila Kislitsyn <dangost16@gmail.com>"]
+readme = "README.md"
+packages = [{include = "bntu_platform"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+flask = "^2.3.1"
+psycopg2-binary = "^2.9.6"
+python-dotenv = "^1.0.0"
+waitress = "^2.1.2"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.3.1"
+black = "^23.3.0"
+pylint = "^2.17.3"
+poethepoet = "^0.19.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
