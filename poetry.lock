@@ -83,6 +83,18 @@ files = [
 ]
 
 [[package]]
+name = "caspius"
+version = "1.2"
+description = "Simple log system for python"
+category = "main"
+optional = false
+python-versions = ">=3.6,<4.0"
+files = [
+    {file = "caspius-1.2-py3-none-any.whl", hash = "sha256:e4cfa428f37ce6d5619ff3264b6c522e7bf9faac9320cabbf8b2a30b8803d05a"},
+    {file = "caspius-1.2.tar.gz", hash = "sha256:39beaa9d9f5f5e3971b8feb4a856de2fee62dbf59642b9c7505e5841dc95b825"},
+]
+
+[[package]]
 name = "click"
 version = "8.1.3"
 description = "Composable command line interface toolkit"
@@ -533,6 +545,24 @@ files = [
 ]
 
 [[package]]
+name = "pyjwt"
+version = "2.6.0"
+description = "JSON Web Token implementation in Python"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "PyJWT-2.6.0-py3-none-any.whl", hash = "sha256:d83c3d892a77bbb74d3e1a2cfa90afaadb60945205d1095d9221f04466f64c14"},
+    {file = "PyJWT-2.6.0.tar.gz", hash = "sha256:69285c7e31fc44f68a1feb309e948e0df53259d579295e6cfe2b1792329f05fd"},
+]
+
+[package.extras]
+crypto = ["cryptography (>=3.4.0)"]
+dev = ["coverage[toml] (==5.0.4)", "cryptography (>=3.4.0)", "pre-commit", "pytest (>=6.0.0,<7.0.0)", "sphinx (>=4.5.0,<5.0.0)", "sphinx-rtd-theme", "zope.interface"]
+docs = ["sphinx (>=4.5.0,<5.0.0)", "sphinx-rtd-theme", "zope.interface"]
+tests = ["coverage[toml] (==5.0.4)", "pytest (>=6.0.0,<7.0.0)"]
+
+[[package]]
 name = "pylint"
 version = "2.17.3"
 description = "python code static checker"
@@ -774,4 +804,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "8e44171e3187497c2fd1d3e91f00e24a3b4fe85547a42886b7219873ba8da849"
+content-hash = "fc9a9769099fb9a35552234545cef8c1c6ae133e75ca807cea2a7347fd490aa4"
