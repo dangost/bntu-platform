@@ -10,12 +10,14 @@ def main():
     config = Config()
     app = create_app(config)
     protocol = "http"
-    app.config.logger.log(f"Server started at {protocol}://{config.server_config.host}:{config.server_config.port}")
+    app.config.logger.log(
+        f"Server started at {protocol}://{config.server_config.host}:{config.server_config.port}"
+    )
     waitress.serve(
         app,
         host=config.server_config.host,
         port=config.server_config.port,
-        threads=config.server_config.workers
+        threads=config.server_config.workers,
     )
 
 

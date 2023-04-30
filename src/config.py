@@ -50,5 +50,5 @@ class Config:
 
     @staticmethod
     def log_handler(log: str):
-        with open('logs.txt', 'a') as fs:
+        with open("logs.txt", "a", encoding="utf-8") as fs:
             fs.write(f"\n{log}")

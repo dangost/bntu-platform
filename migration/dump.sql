@@ -63,7 +63,7 @@ create table users (
     id serial primary key,
     firstname text not null,
     surname text not null,
-    email text not null,
+    email text not null unique,
     password_hash text not null,
     role_id int references roles(id),
     avatar text

@@ -7,7 +7,7 @@ readme = "README.md"
 packages = [{include = "bntu_platform"}]
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = ">=3.9"
 flask = "^2.3.1"
 psycopg2-binary = "^2.9.6"
 python-dotenv = "^1.0.0"
@@ -21,6 +21,38 @@ pytest = "^7.3.1"
 black = "^23.3.0"
 pylint = "^2.17.3"
 poethepoet = "^0.19.0"
+pyinstaller = "^5.10.1"
+
+[tool.poe.tasks]
+tests = 'python -m pytest ./tests'
+format = 'black ./'
+lint-src = 'pylint ./src'
+lint-tests = 'pylint ./tests'
+precommit = ['format', 'lint-src', 'lint-tests', 'tests']
+
+[tool.pylint.BASIC]
+good-names = ["id", "db", "e", "f", "fs"]
+extension-pkg-whitelist = ["falcon"]
+
+[tool.pylint."MESSAGES CONTROL"]
+disable = [
+    "missing-class-docstring",
+    "missing-module-docstring",
+    "missing-function-docstring",
+    "too-few-public-methods",
+    "fixme",
+    "unused-argument",
+    "no-self-use",
+    "too-many-instance-attributes",
+    "cyclic-import",
+    "useless-option-value",
+    "pointless-string-statement"
+]
+
+[tool.pylint.DESIGN]
+max-args = 6
+min-similarity-lines = 5
+ignore-imports='y'
 
 [build-system]
 requires = ["poetry-core"]

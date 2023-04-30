@@ -1,0 +1,19 @@
+FROM python:3.9.16-alpine3.17
+
+WORKDIR /app
+
+COPY src/ /app/src
+COPY tests/ /app/tests
+COPY views/ /app/views
+COPY runner.py /app/
+COPY pyproject.toml /app/
+COPY poetry.lock /app/
+COPY Makefile /app/
+
+RUN apk add --update make binutils
+
+RUN pip install poetry
+RUN poetry config virtualenvs.create false
+RUN poetry install --no-root
+
+CMD ["make", "build_platform"]
