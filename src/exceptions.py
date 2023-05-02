@@ -10,3 +10,10 @@ class JWTSecretNotExists(ServiceException):
         self.code = 1
         self.message = "JWT secret not exists. Service required it to startup"
         super().__init__(self.code, self.message)
+
+
+class LoginNotEnoughFields(ServiceException):
+    def __init__(self):
+        self.code = 401
+        self.message = "Unauthorized. Not enough fields"
+        super().__init__(self.code, self.message)
