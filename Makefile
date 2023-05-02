@@ -8,7 +8,7 @@ docker-image:
 build_for_alpine:
 	docker build -t alpine-builder -f Dockerfile-builder .
 
-alpine: build_for_alpine
+alpine:
 	docker run --name alpine_builder_container -v $(PWD)/alpine:/app/dist alpine-builder
 	docker stop alpine_builder_container
 	docker rm alpine_builder_container
