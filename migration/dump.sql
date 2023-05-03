@@ -89,7 +89,16 @@ create table files(
     path text not null unique,
     size_mb text not null,
     file_hash text not null,
-    upload_from int references users(id)
+    upload_from int references users(id),
+    uploaded_time timestamptz default NOW()
+);
+
+create table posts(
+    id serial primary key,
+    user_id int references users(id),
+    datetime timestamptz default NOW(),
+    container json not null,
+    scope json
 );
 
 insert into faculties (name, shortcut, description) values ('Факультет Информационных Технолоий и Робототехники', 'ФИТР', 'Просто норм, факультет для пацанов');

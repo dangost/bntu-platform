@@ -20,11 +20,11 @@ class Folders:
 
 class MinioClient:
     def __init__(
-            self,
-            access_key: str,
-            secret_key: str,
-            host: str = "127.0.0.1",
-            port: int = 9000,
+        self,
+        access_key: str,
+        secret_key: str,
+        host: str = "127.0.0.1",
+        port: int = 9000,
     ):
         self.__client = Minio(
             endpoint=f"{host}:{port}",
@@ -37,7 +37,7 @@ class MinioClient:
             self.__client.make_bucket("data")
 
     def upload_file(
-            self, data: bytes | BytesIO, folder: str, filename: str, size: int = -1
+        self, data: bytes | BytesIO, folder: str, filename: str, size: int = -1
     ) -> str:
         path = f"{folder}/{str(uuid.uuid4()).replace('-', '')[0:10]}"
         if "." in filename:

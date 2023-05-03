@@ -24,7 +24,7 @@ def upload_file():
     return jsonify({"status": 200, "message": "OK", "file_id": file_id}), 200
 
 
-@files_api.route("/images/<int:image_id>", methods=['GET'])
+@files_api.route("/images/<int:image_id>", methods=["GET"])
 def get_image(image_id: int):
     files_service: FilesService = app.config.files_service
     filename, data = files_service.get_image(image_id)

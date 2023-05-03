@@ -27,5 +27,5 @@ def init_services(app: Flask, config: Config) -> None:
     )
 
     app.config.auth_service = AuthService(db_client, config.server_config.jwt_secret)
-    app.config.user_service = UserService(db_client)
+    app.config.user_service = UserService(db_client, minio_client)
     app.config.files_service = FilesService(db_client, minio_client)

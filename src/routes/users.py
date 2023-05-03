@@ -32,7 +32,7 @@ def reset_password():
     return jsonify({"status": 200, "message": "Password was changed"}), 200
 
 
-@users_api.route("/change-avatar", methods=['POST'])
+@users_api.route("/change-avatar", methods=["POST"])
 def change_avatar():
     auth_service: AuthService = app.config.auth_service
     token = request.headers.get("Authorization", None)
@@ -43,7 +43,9 @@ def change_avatar():
     files_service: FilesService = app.config.files_service
     filename = request.json.get("filename")
     payload = request.json.get("base64")
-    file_id, _ = files_service.upload_file(user, filename, payload, folder=Folders.IMAGES)
+    file_id, _ = files_service.upload_file(
+        user, filename, payload, folder=Folders.IMAGES
+    )
     path = f"/api/files/images/{file_id}"
     user_service.change_avatar(user, path)
 

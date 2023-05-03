@@ -1,6 +1,5 @@
 import base64
 from io import BytesIO
-from typing import Optional, Tuple
 
 from src.common.crypto import sha256
 from src.exceptions import S3FileNotFound
@@ -29,7 +28,7 @@ class FilesService:
         return filename, image_data
 
     def upload_file(
-            self, user: User, filename: str, data: str | bytes, folder: str = Folders.FILES
+        self, user: User, filename: str, data: str | bytes, folder: str = Folders.FILES
     ) -> (int, str):
         if isinstance(data, str):
             data = base64.b64decode(data.encode("UTF-8"))
@@ -44,8 +43,10 @@ class FilesService:
             commit=True,
         )
         result = self.__db_client.execute(
-            f"select id, path from files order by id desc limit 1",
-            return_function=lambda r: (r[0][0], r[0][1]) if len(r) == 1 and len(r[0]) == 2 else None
+            "select id, path from files order by id desc limit 1",
+            return_function=lambda r: (r[0][0], r[0][1])
+            if len(r) == 1 and len(r[0]) == 2
+            else None,
         )
         file_id, path = result
         return file_id, path
