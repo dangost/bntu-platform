@@ -31,7 +31,7 @@ lint-tests = 'pylint ./tests'
 precommit = ['format', 'lint-src', 'lint-tests', 'tests']
 
 [tool.pylint.BASIC]
-good-names = ["id", "db", "e", "f", "fs"]
+good-names = ["id", "db", "e", "f", "fs","ip"]
 extension-pkg-whitelist = ["falcon"]
 
 [tool.pylint."MESSAGES CONTROL"]
@@ -46,7 +46,9 @@ disable = [
     "too-many-instance-attributes",
     "cyclic-import",
     "useless-option-value",
-    "pointless-string-statement"
+    "pointless-string-statement",
+    "invalid-name",
+    "raise-missing-from"
 ]
 
 [tool.pylint.DESIGN]

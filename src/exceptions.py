@@ -14,6 +14,13 @@ class JWTSecretNotExists(ServiceException):
 
 class LoginNotEnoughFields(ServiceException):
     def __init__(self):
-        self.code = 401
+        self.code = 403
         self.message = "Unauthorized. Not enough fields"
+        super().__init__(self.code, self.message)
+
+
+class UnauthorizedException(ServiceException):
+    def __init__(self):
+        self.code = 401
+        self.message = "Unauthorized. User not found or incorrect credentials"
         super().__init__(self.code, self.message)

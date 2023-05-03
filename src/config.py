@@ -34,7 +34,7 @@ class ServerConfig:
 class DatabaseConfig:
     def __init__(self):
         self.host = string_env(DB_HOST)
-        self.port = string_env(DB_PORT)
+        self.port = int_env(DB_PORT)
         self.user = string_env(DB_USER)
         self.password = string_env(DB_PASSWORD)
         self.database = string_env(DB_DATABASE)

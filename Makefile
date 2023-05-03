@@ -29,5 +29,6 @@ copy_views:
 	cp -r views dist/views
 
 clean:
+	docker builder prune
+	sudo rm -r alpine
 	docker rmi bntu-platform
-

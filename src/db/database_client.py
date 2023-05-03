@@ -4,13 +4,20 @@ import psycopg2
 
 
 class DatabaseClient:
-    def __init__(self, user: str, password: str, db: str = "postgres", host: str = "127.0.0.1", port: int = 5423):
+    def __init__(
+        self,
+        user: str,
+        password: str,
+        db: str = "postgres",
+        host: str = "127.0.0.1",
+        port: int = 5432,
+    ):
         self.__credentials = {
             "user": user,
             "host": host,
             "port": port,
             "password": password,
-            "dbname": db
+            "database": db,
         }
         self._connection = psycopg2.connect(**self.__credentials)
         self._cursor = self._connection.cursor()
@@ -31,7 +38,9 @@ class DatabaseClient:
     def fetchall(self) -> list[tuple]:
         return self._cursor.fetchall()
 
-    def execute(self, query: str, commit: bool = False, return_function=None) -> Optional[list]:
+    def execute(
+        self, query: str, commit: bool = False, return_function=None
+    ) -> Optional[list]:
         self._cursor.execute(query)
         result = self._cursor.fetchall()
         if commit:
@@ -39,7 +48,8 @@ class DatabaseClient:
         if not return_function:
             return result if result else None
         else:
-            return_function(result)
+            handled = return_function(result)
+            return handled if handled else None
 
     def execute_queryset(self, queryset: list, commit: bool = False) -> None:
         with self._connection.cursor() as cursor:
@@ -50,3 +60,4 @@ class DatabaseClient:
 
     def close(self):
         self._cursor.close()
+        self._connection.close()

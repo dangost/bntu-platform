@@ -9,7 +9,7 @@ from src.routes import init_routes
 
 def error_handler(exc: ServiceException):
     current_app.config.logger.warning(f"{exc.code} | {exc.message}")
-    return jsonify({"statusCode": exc.code, "message": exc.message}), exc.code
+    return jsonify({"status": exc.code, "message": exc.message}), exc.code
 
 
 def init_service(app: Flask, config_: Config) -> None:
@@ -17,4 +17,5 @@ def init_service(app: Flask, config_: Config) -> None:
     init_services(app, config_)
     init_routes(app)
 
+    app.config['JSON_SORT_KEYS'] = False
     app.register_error_handler(ServiceException, error_handler)
