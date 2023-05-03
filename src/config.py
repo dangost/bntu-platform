@@ -19,6 +19,12 @@ DB_DATABASE = "DB_DATABASE"
 # LOGS
 LOG_FILE = "LOG_FILE"
 
+# MINIO
+MINIO_HOST = "MINIO_HOST"
+MINIO_PORT = "MINIO_PORT"
+MINIO_ACCESS_KEY = "MINIO_ACCESS_KEY"
+MINIO_SECRET_KEY = "MINIO_SECRET_KEY"
+
 
 class ServerConfig:
     def __init__(self):
@@ -40,10 +46,19 @@ class DatabaseConfig:
         self.database = string_env(DB_DATABASE)
 
 
+class MinioConfig:
+    def __init__(self):
+        self.host = string_env(MINIO_HOST)
+        self.port = string_env(MINIO_PORT)
+        self.access_key = string_env(MINIO_ACCESS_KEY)
+        self.secret_key = string_env(MINIO_SECRET_KEY)
+
+
 class Config:
     def __init__(self):
         self.server_config = ServerConfig()
         self.database_config = DatabaseConfig()
+        self.minio_config = MinioConfig()
         self.logger = Logger()
         self.logger.set_handler(self.log_handler)
         self.logger.info("Config loaded")

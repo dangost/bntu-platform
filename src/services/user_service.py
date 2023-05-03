@@ -13,13 +13,12 @@ class UserService:
 
         email = self.__db_client.execute(
             f"select email from users where id={user.id} and password_hash='{current_hash}'",
-            return_function=lambda r: r[0][0] if len(r) > 0 and len(r[0]) > 0 else None
+            return_function=lambda r: r[0][0] if len(r) > 0 and len(r[0]) > 0 else None,
         )
         if email != user.email:
             raise IncorrectCurrentPassword()
 
         self.__db_client.execute(
             f"update users set password_hash='{new_hash}' where id={user.id}",
-            commit=True
+            commit=True,
         )
-        return None

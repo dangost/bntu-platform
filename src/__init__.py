@@ -17,5 +17,5 @@ def init_service(app: Flask, config_: Config) -> None:
     init_services(app, config_)
     init_routes(app)
 
-    app.config['JSON_SORT_KEYS'] = False
+    app.config["JSON_SORT_KEYS"] = False
     app.register_error_handler(ServiceException, error_handler)

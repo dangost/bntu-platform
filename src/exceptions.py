@@ -36,7 +36,7 @@ class IncorrectCurrentPassword(ServiceException):
 class S3CannotUploadFile(ServiceException):
     def __init__(self, log: str = ""):
         self.code = 602
-        self.message = f'Can\'t upload file to S3. {log}'
+        self.message = f"Can't upload file to S3. {log}"
         super().__init__(self.code, self.message)
 
 

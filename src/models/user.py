@@ -12,11 +12,7 @@ class User:
     @classmethod
     def from_row(cls, row):
         return User(
-            id=row[0],
-            firstname=row[1],
-            surname=row[2],
-            email=row[3],
-            role=row[4]
+            id=row[0], firstname=row[1], surname=row[2], email=row[3], role=row[4]
         )
 
     def to_json(self) -> dict:
@@ -25,5 +21,5 @@ class User:
             "firstname": self.firstname,
             "surname": self.surname,
             "email": self.email,
-            "role": self.role
+            "role": self.role,
         }

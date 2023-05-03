@@ -87,8 +87,9 @@ create table files(
     id serial primary key,
     filename text not null,
     path text not null unique,
-    size_mb float not null,
-    update_from int references users(id)
+    size_mb text not null,
+    file_hash text not null,
+    upload_from int references users(id)
 );
 
 insert into faculties (name, shortcut, description) values ('Факультет Информационных Технолоий и Робототехники', 'ФИТР', 'Просто норм, факультет для пацанов');
