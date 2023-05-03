@@ -11,5 +11,5 @@ class UserFile:
         return {
             "filename": self.filename,
             "size": self.size_mb,
-            "download_link": self.download_link
+            "download_link": self.download_link,
         }

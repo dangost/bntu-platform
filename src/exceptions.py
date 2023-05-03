@@ -45,3 +45,24 @@ class S3ImageNotFound(ServiceException):
         self.code = 603
         self.message = f"Image not found in S3. {log}"
         super().__init__(self.code, self.message)
+
+
+class S3FileNotFound(ServiceException):
+    def __init__(self):
+        self.code = 404
+        self.message = "Can\'t find file in S3 storage"
+        super().__init__(self.code, self.message)
+
+
+class S3FileIsNotImage(ServiceException):
+    def __init__(self):
+        self.code = 604
+        self.message = "Chosen file is not image"
+        super().__init__(self.code, self.message)
+
+
+class S3FileNotCreated(ServiceException):
+    def __init__(self):
+        self.code = 605
+        self.message = "File not created at S3 storage"
+        super().__init__(self.code, self.message)

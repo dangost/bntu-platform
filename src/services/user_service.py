@@ -1,4 +1,5 @@
 from src.common.crypto import sha256
+from src.models.user import User
 from src.repositories.db_repo import DatabaseClient
 from src.exceptions import IncorrectCurrentPassword
 
@@ -7,7 +8,7 @@ class UserService:
     def __init__(self, db_client: DatabaseClient):
         self.__db_client = db_client
 
-    def change_password(self, user, current_pass: str, new_pass: str) -> None:
+    def change_password(self, user: User, current_pass: str, new_pass: str) -> None:
         current_hash = sha256(current_pass)
         new_hash = sha256(new_pass)
 
@@ -21,4 +22,10 @@ class UserService:
         self.__db_client.execute(
             f"update users set password_hash='{new_hash}' where id={user.id}",
             commit=True,
+        )
+
+    def change_avatar(self, user: User, path: str) -> None:
+        self.__db_client.execute(
+            f"update users set avatar='{path}' where id={user.id}",
+            commit=True
         )

@@ -5,7 +5,7 @@ from io import BytesIO
 from minio import Minio
 from minio.error import S3Error
 
-from src.exceptions import S3CannotUploadFile, S3ImageNotFound
+from src.exceptions import S3CannotUploadFile, S3ImageNotFound, S3FileIsNotImage
 
 
 class Folders:
@@ -20,11 +20,11 @@ class Folders:
 
 class MinioClient:
     def __init__(
-        self,
-        access_key: str,
-        secret_key: str,
-        host: str = "127.0.0.1",
-        port: int = 9000,
+            self,
+            access_key: str,
+            secret_key: str,
+            host: str = "127.0.0.1",
+            port: int = 9000,
     ):
         self.__client = Minio(
             endpoint=f"{host}:{port}",
@@ -37,7 +37,7 @@ class MinioClient:
             self.__client.make_bucket("data")
 
     def upload_file(
-        self, data: bytes | BytesIO, folder: str, filename: str, size: int = -1
+            self, data: bytes | BytesIO, folder: str, filename: str, size: int = -1
     ) -> str:
         path = f"{folder}/{str(uuid.uuid4()).replace('-', '')[0:10]}"
         if "." in filename:
@@ -63,10 +63,12 @@ class MinioClient:
         return path
 
     def get_image(self, path: str) -> bytes:
-        if Folders.IMAGES not in path:
-            raise S3ImageNotFound()
         try:
-            data = self.__client.get_object("data", object_name=path).data
+            obj = self.__client.get_object("data", object_name=path)
+            data = obj.data
+            if "image" not in obj.headers.get("Content-Type"):
+                raise S3FileIsNotImage()
+
         except S3Error as e:
             raise S3ImageNotFound(str(e))
         return data
