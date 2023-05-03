@@ -1,5 +1,6 @@
 import base64
 from io import BytesIO
+from typing import Union
 
 from src.common.crypto import sha256
 from src.exceptions import S3FileNotFound
@@ -28,7 +29,11 @@ class FilesService:
         return filename, image_data
 
     def upload_file(
-        self, user: User, filename: str, data: str | bytes, folder: str = Folders.FILES
+        self,
+        user: User,
+        filename: str,
+        data: Union[str, bytes],
+        folder: str = Folders.FILES,
     ) -> (int, str):
         if isinstance(data, str):
             data = base64.b64decode(data.encode("UTF-8"))

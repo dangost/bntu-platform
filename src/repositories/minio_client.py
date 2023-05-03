@@ -1,6 +1,7 @@
 import uuid
 from datetime import timedelta
 from io import BytesIO
+from typing import Union
 
 from minio import Minio
 from minio.error import S3Error
@@ -37,7 +38,7 @@ class MinioClient:
             self.__client.make_bucket("data")
 
     def upload_file(
-        self, data: bytes | BytesIO, folder: str, filename: str, size: int = -1
+        self, data: Union[bytes, BytesIO], folder: str, filename: str, size: int = -1
     ) -> str:
         path = f"{folder}/{str(uuid.uuid4()).replace('-', '')[0:10]}"
         if "." in filename:

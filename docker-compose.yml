@@ -13,6 +13,10 @@ services:
       DB_USER: "fafafa"
       DB_PASSWORD: "Zze780m072VH"
       DB_DATABASE: "platform"
+      MINIO_HOST: "minio"
+      MINIO_PORT: "9000"
+      MINIO_ACCESS_KEY: "fafafa"
+      MINIO_SECRET_KEY: "fafafa16"
     ports:
       - "8080:8080"
     networks:
