@@ -18,7 +18,7 @@ services:
     networks:
       - platform-network
   db:
-    container_name: postgres
+    container_name: pl_postgres
     image: postgres
     restart: always
     environment:
@@ -31,6 +31,21 @@ services:
       - "5432:5432"
     networks:
       - platform-network
+  minio:
+    container_name: pl_minio
+    image: quay.io/minio/minio:latest
+    restart: always
+    command: server --console-address ":9001" /data
+    volumes:
+      - /home/gost/pets/bntu-platform/volumes/minio:/data
+    environment:
+      MINIO_ACCESS_KEY: fafafa
+      MINIO_SECRET_KEY: fafafa16
+    networks:
+      - platform-network
+    ports:
+      - "9000:9000"
+      - "9001:9001"
 networks:
   platform-network:
     driver: bridge

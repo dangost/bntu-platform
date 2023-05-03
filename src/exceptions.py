@@ -31,3 +31,17 @@ class IncorrectCurrentPassword(ServiceException):
         self.code = 601
         self.message = "Incorrect current password"
         super().__init__(self.code, self.message)
+
+
+class S3CannotUploadFile(ServiceException):
+    def __init__(self, log: str = ""):
+        self.code = 602
+        self.message = f'Can\'t upload file to S3. {log}'
+        super().__init__(self.code, self.message)
+
+
+class S3ImageNotFound(ServiceException):
+    def __init__(self, log: str = ""):
+        self.code = 603
+        self.message = f"Image not found in S3. {log}"
+        super().__init__(self.code, self.message)

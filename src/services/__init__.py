@@ -1,7 +1,7 @@
 from flask import Flask
 
 from src import Config
-from src.db.database_client import DatabaseClient
+from src.repositories.db_repo import DatabaseClient
 from src.services.auth_service import AuthService
 from src.services.user_service import UserService
 

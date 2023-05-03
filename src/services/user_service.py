@@ -1,5 +1,5 @@
 from src.common.crypto import sha256
-from src.db.database_client import DatabaseClient
+from src.repositories.db_repo import DatabaseClient
 from src.exceptions import IncorrectCurrentPassword
 
 

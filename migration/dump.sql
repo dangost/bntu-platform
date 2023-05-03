@@ -83,6 +83,14 @@ create table teachers(
     phone text
 ) inherits (users);
 
+create table files(
+    id serial primary key,
+    filename text not null,
+    path text not null unique,
+    size_mb float not null,
+    update_from int references users(id)
+);
+
 insert into faculties (name, shortcut, description) values ('Факультет Информационных Технолоий и Робототехники', 'ФИТР', 'Просто норм, факультет для пацанов');
 insert into department (name, shortcut, description, faculty_id)
 values('Программное обеспечение информационных систем и технолоий', 'ПОИСиТ', 'Самая пацанская кафедра', get_faculty_by_shortcut('ФИТР'));
