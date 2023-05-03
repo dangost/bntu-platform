@@ -42,14 +42,15 @@ class DatabaseClient:
         self, query: str, commit: bool = False, return_function=None
     ) -> Optional[list]:
         self._cursor.execute(query)
-        result = self._cursor.fetchall()
         if commit:
             self.commit()
-        if not return_function:
-            return result if result else None
-        else:
-            handled = return_function(result)
-            return handled if handled else None
+        if query.lower().startswith('select'):
+            result = self._cursor.fetchall()
+            if not return_function:
+                return result if result else None
+            else:
+                handled = return_function(result)
+                return handled if handled else None
 
     def execute_queryset(self, queryset: list, commit: bool = False) -> None:
         with self._connection.cursor() as cursor:

@@ -3,6 +3,7 @@ from flask import Flask
 from src import Config
 from src.db.database_client import DatabaseClient
 from src.services.auth_service import AuthService
+from src.services.user_service import UserService
 
 
 def init_services(app: Flask, config: Config) -> None:
@@ -16,3 +17,4 @@ def init_services(app: Flask, config: Config) -> None:
         db=config.database_config.database,
     )
     app.config.auth_service = AuthService(db_client, config.server_config.jwt_secret)
+    app.config.user_service = UserService(db_client)

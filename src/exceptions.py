@@ -24,3 +24,10 @@ class UnauthorizedException(ServiceException):
         self.code = 401
         self.message = "Unauthorized. User not found or incorrect credentials"
         super().__init__(self.code, self.message)
+
+
+class IncorrectCurrentPassword(ServiceException):
+    def __init__(self):
+        self.code = 601
+        self.message = "Incorrect current password"
+        super().__init__(self.code, self.message)

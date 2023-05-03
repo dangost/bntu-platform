@@ -1,7 +1,6 @@
-import hashlib
-
 import jwt
 
+from src.common.crypto import sha256
 from src.db.database_client import DatabaseClient
 from src.exceptions import UnauthorizedException
 from src.models.authorization import LoginModel
@@ -18,7 +17,7 @@ class AuthService:
         self.algorithm = "HS256"
 
     def login(self, login_model: LoginModel) -> JWT_TOKEN:
-        hash_password = self.sha256(login_model.password)
+        hash_password = sha256(login_model.password)
         user_id = self.db_client.execute(
             f"select id from users "
             f"where email='{login_model.login}' and password_hash='{hash_password}'",
@@ -56,7 +55,3 @@ class AuthService:
             raise UnauthorizedException()
 
         return User.from_row(result[0])
-
-    @staticmethod
-    def sha256(value: str) -> str:
-        return hashlib.sha256(value.encode("utf-8")).hexdigest()
