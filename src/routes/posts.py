@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, current_app as app, request
 
+from src.common.flask_auth import get_current_user
 from src.models.posts import Post
 from src.services import AuthService, UserService
 
@@ -8,10 +9,7 @@ posts_api = Blueprint("posts-api", __name__, url_prefix="/api/posts")
 
 @posts_api.route("/", methods=["POST"])
 def create_post():
-    auth_service: AuthService = app.config.auth_service
-    token = request.headers.get("Authorization", None)
-    host = request.host
-    user = auth_service.auth(token, host)
+    user = get_current_user()
 
     user_service: UserService = app.config.user_service
 
@@ -23,10 +21,7 @@ def create_post():
 
 @posts_api.route("/<int:user_id>", methods=["GET"])
 def get_user_posts(user_id: int):
-    auth_service: AuthService = app.config.auth_service
-    token = request.headers.get("Authorization", None)
-    host = request.host
-    visitor = auth_service.auth(token, host)
+    visitor = get_current_user()
 
     user_service: UserService = app.config.user_service
 
