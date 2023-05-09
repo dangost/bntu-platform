@@ -73,3 +73,10 @@ class PostBodyIsEmpty(ServiceException):
         self.code = 605
         self.message = "Post body is empty"
         super().__init__(self.code, self.message)
+
+
+class DivisionNotFound(ServiceException):
+    def __init__(self, division: str):
+        self.code = 404
+        self.message = f"{division} not found"
+        super().__init__(self.code, self.message)

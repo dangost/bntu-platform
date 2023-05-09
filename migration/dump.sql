@@ -66,7 +66,8 @@ create table users (
     email text not null unique,
     password_hash text not null,
     role_id int references roles(id),
-    avatar text
+    avatar text,
+    phone_number text
 );
 
 create table students(
@@ -74,6 +75,12 @@ create table students(
     course int not null,
     group_id int not null references groups(id)
 ) inherits (users);
+
+create table leaders(
+    id serial primary key,
+    group_id int not null references groups(id),
+    leader int not null references students(student_id)
+);
 
 create table teachers(
     departament_id int not null references department(id),
@@ -106,8 +113,10 @@ insert into department (name, shortcut, description, faculty_id)
 values('Программное обеспечение информационных систем и технолоий', 'ПОИСиТ', 'Самая пацанская кафедра', get_faculty_by_shortcut('ФИТР'));
 insert into groups (id, faculty_id, departament_id) values (10702119, get_faculty_by_shortcut('ФИТР'), get_dep_by_short('ПОИСиТ'));
 insert into students(role_id, firstname, surname, email, password_hash, student_id, course, group_id) values
-(get_role_id('Student'), 'Данила', 'Кислицин', 'dangost16@gmail.com', 'a66b47e6b2fdc5aae2aa914e4718cf2af21f70c7c842ad5ce8b2ac7946840fec', 1070211908, 4, 10702119);
+(get_role_id('Student'), 'Данила', 'Кислицин', 'fafafa@gmail.com', 'a66b47e6b2fdc5aae2aa914e4718cf2af21f70c7c842ad5ce8b2ac7946840fec', 1070211908, 4, 10702119);
 insert into users(firstname, surname, email, password_hash, role_id) values
 ('Dan', 'Gost', 'dangost16@gmail.com', 'f74b4df676be77106dd1ebecf3bd1657f1b8973858f92878184e41eb488ab9bd', get_role_id('Admin'));
 insert into teachers (firstname, surname, email, password_hash, role_id, departament_id, job_title)
 values ('Ирина', 'Ковалёва', 'ilkovaleva@bntu.by', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', get_role_id('Teacher'), get_dep_by_short('ПОИСиТ'), 'Доцент')
+
+

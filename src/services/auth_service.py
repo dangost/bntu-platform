@@ -46,7 +46,7 @@ class AuthService:
         if ip_address != payload["ip_address"]:
             raise UnauthorizedException()
         result = self.db_client.execute(
-            f"select u.id, firstname, surname, email, r.name, avatar from users u "
+            f"select u.id, firstname, surname, email, r.name, avatar, phone_number from users u "
             f"inner join roles r on r.id = u.role_id "
             f"where email='{login}' limit 1"
         )

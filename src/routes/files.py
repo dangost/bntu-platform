@@ -23,7 +23,7 @@ def upload_file():
     return jsonify({"status": 200, "message": "OK", "file_id": file_id}), 200
 
 
-@files_api.route("/upload-image", methods=['POST'])
+@files_api.route("/upload-image", methods=["POST"])
 def upload_image():
     files_service: FilesService = app.config.files_service
     user = get_current_user()

@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, current_app as app, request
 
 from src.common.flask_auth import get_current_user
 from src.models.posts import Post
-from src.services import AuthService, UserService
+from src.services import UserService
 
 posts_api = Blueprint("posts-api", __name__, url_prefix="/api/posts")
 

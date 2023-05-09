@@ -2,7 +2,7 @@ from flask import Blueprint, request, current_app as app, jsonify
 
 from src.common.flask_auth import get_current_user
 from src.repositories.minio_client import Folders
-from src.services import AuthService, FilesService
+from src.services import FilesService
 from src.services.user_service import UserService
 
 users_api = Blueprint("users_api", __name__, url_prefix="/api/users")
