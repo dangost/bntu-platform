@@ -5,7 +5,7 @@ from src.models.files import UserFile
 from src.models.posts import Post, PostContainer
 from src.models.user import User
 from src.repositories.db_repo import DatabaseClient
-from src.exceptions import IncorrectCurrentPassword, PostBodyIsEmpty
+from src.exceptions import IncorrectCurrentPassword, PostBodyIsEmpty, S3FileNotFound, PostNotFound
 from src.repositories.minio_client import MinioClient
 
 
@@ -71,17 +71,23 @@ class UserService:
             f"select container, scope from posts where user_id={user_id}"
         )
 
+        if not results:
+            raise PostNotFound()
+
         posts = []
         for container, scope in results:
             if group in scope or group is None:
                 files = []
                 for file_id in container.get("files", []):
-                    filename, size, path = self.__db_client.execute(
-                        f"select filename, size_mb, path from files where id={file_id} limit 1",
-                        return_function=lambda r: r[0]
-                        if len(r) > 0 and len(r[0][0]) > 0
-                        else None,
-                    )
+                    try:
+                        filename, size, path = self.__db_client.execute(
+                            f"select filename, size_mb, path from files where id={file_id} limit 1",
+                            return_function=lambda r: r[0]
+                            if len(r) > 0 and len(r[0][0]) > 0
+                            else None,
+                        )
+                    except Exception:
+                        raise S3FileNotFound()
                     download_link = self.__minio.get_file(path)
                     files.append(UserFile(filename, size, download_link))
                 text = container.get("text")

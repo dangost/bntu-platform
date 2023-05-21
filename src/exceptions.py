@@ -80,3 +80,9 @@ class DivisionNotFound(ServiceException):
         self.code = 404
         self.message = f"{division} not found"
         super().__init__(self.code, self.message)
+
+
+class PostNotFound(ServiceException):
+    def __init__(self):
+        self.code = 404
+        self.message = "Post not found"
