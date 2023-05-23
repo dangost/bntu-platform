@@ -9,6 +9,7 @@ class User:
     email: str
     role: str
     phone_number: str
+    avatar: str
 
     @classmethod
     def from_row(cls, row):
@@ -18,7 +19,8 @@ class User:
             surname=row[2],
             email=row[3],
             role=row[4],
-            phone_number=row[5],
+            avatar=row[5],
+            phone_number=row[6]
         )
 
     def to_json(self) -> dict:
@@ -29,6 +31,7 @@ class User:
             "email": self.email,
             "role": self.role,
             "phone_number": self.phone_number,
+            "avatar": self.avatar
         }
 
 
@@ -36,6 +39,7 @@ class User:
 class Student(User):
     student_id: int
     course: int
+    group: str
 
     @classmethod
     def from_row(cls, row):
@@ -45,9 +49,11 @@ class Student(User):
             surname=row[2],
             email=row[3],
             role=row[4],
-            phone_number=row[5],
-            student_id=row[6],
-            course=row[7],
+            avatar=row[5],
+            phone_number=row[6],
+            student_id=row[7],
+            course=row[8],
+            group=row[9]
         )
 
     @property
@@ -59,6 +65,8 @@ class Student(User):
             "email": self.email,
             "role": self.role,
             "phone_number": self.phone_number,
+            "avatar": self.avatar,
             "student_id": self.student_id,
             "course": self.course,
+            "group": self.group
         }

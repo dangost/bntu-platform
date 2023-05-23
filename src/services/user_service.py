@@ -3,7 +3,7 @@ import json
 from src.common.crypto import sha256
 from src.models.files import UserFile
 from src.models.posts import Post, PostContainer
-from src.models.user import User
+from src.models.user import User, Student
 from src.repositories.db_repo import DatabaseClient
 from src.exceptions import IncorrectCurrentPassword, PostBodyIsEmpty, S3FileNotFound, PostNotFound
 from src.repositories.minio_client import MinioClient
@@ -94,3 +94,14 @@ class UserService:
 
                 posts.append(PostContainer(text=text, files=files))
         return posts
+
+    def get_student(self, user: User) -> Student:
+        student_row = self.__db_client.execute(
+            "select s.id, firstname, surname, email, r.name, avatar, phone_number, student_id, course, group_id "
+            "from students s inner join roles r on r.id = s.role_id "
+            f"where s.id = {user.id};"
+        )
+
+        student = Student.from_row(student_row[0])
+
+        return student

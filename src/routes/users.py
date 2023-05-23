@@ -11,8 +11,16 @@ users_api = Blueprint("users_api", __name__, url_prefix="/api/users")
 @users_api.route("/me", methods=["GET"])
 def user_page():
     user = get_current_user()
-
     return jsonify(user.to_json()), 200
+
+
+@users_api.route("/me-student", methods=['GET'])
+def student_page():
+    user = get_current_user()
+    user_service: UserService = app.config.user_service
+
+    student = user_service.get_student(user)
+    return jsonify(student), 200
 
 
 @users_api.route("/change-password", methods=["POST"])

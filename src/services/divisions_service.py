@@ -70,7 +70,7 @@ class DivisionsService:
             student_id = row[1]
 
             student_row = self.__db_client.execute(
-                "select s.id, firstname, surname, email, r.name, phone_number, student_id, course "
+                "select s.id, firstname, surname, email, r.name, avatar, phone_number, student_id, course, group_id "
                 "from students s inner join roles r on r.id = s.role_id "
                 f"where student_id = {student_id};"
             )
