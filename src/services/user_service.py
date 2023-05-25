@@ -3,7 +3,7 @@ import json
 from src.common.crypto import sha256
 from src.models.files import UserFile
 from src.models.posts import Post, PostContainer
-from src.models.user import User, Student
+from src.models.user import User, Student, Teacher
 from src.repositories.db_repo import DatabaseClient
 from src.exceptions import IncorrectCurrentPassword, PostBodyIsEmpty, S3FileNotFound, PostNotFound
 from src.repositories.minio_client import MinioClient
@@ -68,14 +68,14 @@ class UserService:
             group = None
 
         results = self.__db_client.execute(
-            f"select container, scope from posts where user_id={user_id}"
+            f"select container, scope, datetime from posts where user_id={user_id}"
         )
 
         if not results:
             raise PostNotFound()
 
         posts = []
-        for container, scope in results:
+        for container, scope, date in results:
             if group in scope or group is None:
                 files = []
                 for file_id in container.get("files", []):
@@ -91,8 +91,8 @@ class UserService:
                     download_link = self.__minio.get_file(path)
                     files.append(UserFile(filename, size, download_link))
                 text = container.get("text")
-
-                posts.append(PostContainer(text=text, files=files))
+                date = date.strftime("%d/%m %H:%M")
+                posts.append(PostContainer(text=text, files=files, date=date))
         return posts
 
     def get_student(self, user: User) -> Student:
@@ -105,3 +105,16 @@ class UserService:
         student = Student.from_row(student_row[0])
 
         return student
+
+    def get_teacher(self, teacher_id: int) -> Teacher:
+        teacher_row = self.__db_client.execute(
+            "select t.id, t.firstname, t.surname, t.email, r.name, t.avatar, t.phone_number, "
+            "d.id, d.shortcut, f.id, f.shortcut, t.schedule, t.job_title "
+            "from teachers t "
+            "inner join roles r on t.role_id = r.id "
+            "inner join department d on t.departament_id = d.id "
+            "inner join faculties f on d.faculty_id = f.id "
+            f"where t.id = {teacher_id};"
+        )
+        teacher = Teacher.from_row(teacher_row[0])
+        return teacher

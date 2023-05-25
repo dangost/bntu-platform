@@ -1,3 +1,4 @@
+
 async function choosePage(){
     const token = localStorage.getItem('Token')
     if (token !== "null") {
@@ -8,7 +9,7 @@ async function choosePage(){
             nextPage = '/student.html';
         }
         else if (role === "Teacher") {
-            nextPage = "/lecturer.html";
+            nextPage = "/teacher.html";
         }
         window.location.href = nextPage;
     }

@@ -42,9 +42,10 @@ class FilesService:
         file_hash = sha256(data)
         path = self.__minio.upload_file(data, folder, filename, size_bytes)
 
+        # TODO figure out with inherits foreign keys
         self.__db_client.execute(
             f"insert into files(filename, path, size_mb, upload_from, file_hash) "
-            f"values ('{filename}', '{path}', '{size_mb}', {user.id}, '{file_hash}')",
+            f"values ('{filename}', '{path}', '{size_mb}', 2, '{file_hash}')",
             commit=True,
         )
         result = self.__db_client.execute(

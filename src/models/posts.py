@@ -38,9 +38,10 @@ class PostContainerUpload:
 class PostContainer:
     text: Optional[str]
     files: Optional[list[UserFile]]
+    date: str
 
     def to_json(self):
-        return {"text": self.text, "files": [file.to_json() for file in self.files]}
+        return {"text": self.text, "date": self.date, "files": [file.to_json() for file in self.files]}
 
 
 @dataclass(frozen=True)

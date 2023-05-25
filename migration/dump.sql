@@ -83,6 +83,7 @@ create table leaders(
 );
 
 create table teachers(
+    id serial primary key,
     departament_id int not null references department(id),
     schedule json,
     job_title text not null,
@@ -96,13 +97,13 @@ create table files(
     path text not null unique,
     size_mb text not null,
     file_hash text not null,
-    upload_from int references users(id),
+    upload_from int unique references users(id),
     uploaded_time timestamptz default NOW()
 );
 
 create table posts(
     id serial primary key,
-    user_id int references users(id),
+    user_id int not null,
     datetime timestamptz default NOW(),
     container json not null,
     scope json

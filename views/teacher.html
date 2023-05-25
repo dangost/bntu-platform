@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <title>Новый пост</title>
+    <link href="./css/bootstrap.css" rel="stylesheet">
+    <link href="./css/post.css" rel="stylesheet">
+    <script src="./js/logout.js"></script>
+    <script src="./js/requests.js"></script>
+    <script src="./js/teacher.js"></script>
+</head>
+<body>
+        <nav class="navbar navbar-light bg-light">
+
+            <a class="navbar-brand" href="/" style="margin-left: 30px">
+                <img src="./img/logo_BNTU.png" width=70 class="d-inline-block align-top" alt="Логотип БНТУ">
+            </a>
+            <ul class="nav justify-content-end">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="./faculties.html">Университет</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./canteens.html">Столовые</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Деканат</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" onclick="logout()">Выйти</a>
+          </li>
+        </ul>
+        </nav>
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container">
+<div class="profile-wrapper">
+    <div class="profile-section-user">
+        <div class="profile-info-brief p-3"><img class="ismg-fluid user-profile-avatar" id="user_avatar" src="" alt="" style="margin-top: 70px">
+            <div class="text-center">
+                <h5 class="text-uppercase mb-4" style="margin-top: 55px" id="username"></h5>
+            </div>
+        </div>
+        <!-- /.profile-info-brief -->
+        <hr class="m-0">
+        <div class="hidden-sm-down">
+            <hr class="m-0">
+            <div class="profile-info-contact p-4">
+                <h6 class="mb-3">Контакты</h6>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td><strong>Почта:</strong></td>
+                            <td>
+                                <p class="text-muted mb-0" id="user_email"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Телефон:</strong></td>
+                            <td>
+                                <p class="text-muted mb-0" id="user_phone"></p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.profile-info-contact -->
+            <hr class="m-0">
+            <div class="profile-info-general p-4">
+                <h6 class="mb-3">Основная информация</h6>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td><strong>Должность:</strong></td>
+                            <td>
+                                <p class="text-muted mb-0" id="user_job_title"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Факультет:</strong></td>
+                            <td>
+                                <p class="text-muted mb-0" id="user_faculty"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Кафедра:</strong></td>
+                            <td>
+                                <p class="text-muted mb-0" id="user_department"></p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.profile-info-general -->
+            <hr class="m-0">
+        </div>
+        <!-- /.hidden-sm-down -->
+    </div>
+    <!-- /.profile-section-user -->
+    <div class="profile-section-main">
+        <!-- Nav tabs -->
+
+        <div class="tab-content profile-tabs-content">
+            <div class="tab-pane active" id="profile-overview" role="tabpanel">
+                <div class="post-editor">
+                    <textarea name="post-field" id="post-field" class="post-field" placeholder="Завтра пара в 12:00"></textarea>
+                    <div class="d-flex">
+                        <button class="btn btn-success px-4 py-1" onclick="sendPost()">Отправить</button>
+                        <p style="margin-left: 50px">Scope:</p>
+                        <input style="margin-left: 20px" id="scope">
+                        <button class="btn btn-success px-4 py-1" style="margin-left:10px" onclick="addFile()">Файл</button>
+                        <p id="files">
+                        </p>
+                    </div>
+                </div>
+                <div class="stream-posts" id="posts_container">
+                        <!-- /.sp-content -->
+                    </div>
+                    <!-- /.stream-post -->
+                </div>
+                <!-- /.stream-posts -->
+            </div>
+        </div>
+        <!-- /.tab-content -->
+    </div>
+    <!-- /.profile-section-main -->
+</div>
+</div>
+</body>
+</html>

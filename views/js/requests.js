@@ -18,7 +18,7 @@ async function postRequest(route, payload) {
 }
 
  async function getRequest(route) {
-     const token = localStorage.getItem('Token');
+     const token = localStorage.getItem('Token')
      let response =  await fetch(
          route,
          {

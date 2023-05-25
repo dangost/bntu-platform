@@ -23,6 +23,28 @@ def student_page():
     return jsonify(student), 200
 
 
+@users_api.route("/me-teacher", methods=['GET'])
+def teacher_page():
+    user = get_current_user()
+    if user.role != "Teacher":
+        raise Exception("User is not teacher")
+    user_service: UserService = app.config.user_service
+
+    teacher = user_service.get_teacher(user.id)
+
+    return jsonify(teacher), 200
+
+
+@users_api.route("/teachers/<int:teacher_id>", methods=['GET'])
+def get_teacher(teacher_id: int):
+    get_current_user()
+    user_service: UserService = app.config.user_service
+
+    teacher = user_service.get_teacher(teacher_id)
+
+    return jsonify(teacher), 200
+
+
 @users_api.route("/change-password", methods=["POST"])
 def reset_password():
     user_service: UserService = app.config.user_service

@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY src/ /app/src
 COPY tests/ /app/tests
-COPY views/ /app/views
+COPY views3/ /app/views
 COPY runner.py /app/
 COPY pyproject.toml /app/
 COPY poetry.lock /app/
