@@ -19,7 +19,7 @@ def student_page():
     user = get_current_user()
     user_service: UserService = app.config.user_service
 
-    student = user_service.get_student(user)
+    student = user_service.get_student(user.id)
     return jsonify(student), 200
 
 

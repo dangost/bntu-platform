@@ -4,13 +4,13 @@ async function choosePage(){
     if (token !== "null") {
         let data = await getRequest("/api/users/me")
         let role = data.role
-        let nextPage = "";
-        if (role === "Student"){
-            nextPage = '/student.html';
-        }
-        else if (role === "Teacher") {
-            nextPage = "/teacher.html";
-        }
+        let nextPage = "/me";
+        // if (role === "Student"){
+        //     nextPage = '/student.html';
+        // }
+        // else if (role === "Teacher") {
+        //     nextPage = "/teacher.html";
+        // }
         window.location.href = nextPage;
     }
 }

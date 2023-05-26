@@ -38,6 +38,10 @@ class User:
 
 @dataclass(frozen=True)
 class Student(User):
+    departament_id: int
+    dep_shortname: str
+    faculty_id: int
+    faculty_shortname: str
     student_id: int
     course: int
     group: str
@@ -54,7 +58,11 @@ class Student(User):
             phone_number=row[6],
             student_id=row[7],
             course=row[8],
-            group=row[9]
+            group=row[9],
+            departament_id=row[10],
+            dep_shortname=row[11],
+            faculty_id=row[12],
+            faculty_shortname=row[13]
         )
 
     @property
@@ -69,7 +77,11 @@ class Student(User):
             "avatar": self.avatar,
             "student_id": self.student_id,
             "course": self.course,
-            "group": self.group
+            "group": self.group,
+            "departament_id": self.departament_id,
+            "dep_shortname": self.dep_shortname,
+            "faculty_id": self.faculty_id,
+            "faculty_shortname": self.faculty_shortname
         }
 
 

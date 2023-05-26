@@ -104,7 +104,6 @@ async function loadPosts(me) {
 
     let postsObject = document.getElementById("posts_container");
     postsObject.innerHTML = blocks;
-
 }
 
 async function initMainInfo(){

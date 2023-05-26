@@ -19,6 +19,17 @@ def create_post():
     return jsonify({"status": 200, "message": "OK"}), 200
 
 
+@posts_api.route('/feed', methods=['GET'])
+def get_student_feed():
+    user = get_current_user()
+    if user.role != "Student":
+        raise Exception("User is not student")
+    user_service: UserService = app.config.user_service
+    posts = user_service.get_student_feed(user.id)
+
+    return jsonify([post.to_json() for post in posts]), 200
+
+
 @posts_api.route("/<int:user_id>", methods=["GET"])
 def get_user_posts(user_id: int):
     visitor = get_current_user()

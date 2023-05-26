@@ -22,4 +22,6 @@ async function auth(){
     let token = response.headers.get('Authorization')
     localStorage.setItem('Token', token)
     window.location.href = '/';
+
+    document.cookie = `auth=${token}`
 }

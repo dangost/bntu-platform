@@ -35,13 +35,29 @@ class PostContainerUpload:
 
 
 @dataclass(frozen=True)
+class PostUserView:
+    user_id: int
+    full_name: str
+    avatar: str
+
+    def to_json(self) -> dict:
+        return {"user_id": self.user_id, "full_name": self.full_name, "avatar": self.avatar}
+
+
+@dataclass(frozen=True)
 class PostContainer:
     text: Optional[str]
     files: Optional[list[UserFile]]
     date: str
+    user: Optional[PostUserView] = None
 
     def to_json(self):
-        return {"text": self.text, "date": self.date, "files": [file.to_json() for file in self.files]}
+        return {
+            "text": self.text,
+            "date": self.date,
+            "files": [file.to_json() for file in self.files],
+            "user": self.user.to_json() if self.user else None
+        }
 
 
 @dataclass(frozen=True)
