@@ -42,19 +42,19 @@
 <form style="width: 500px;">
   <!-- Email input -->
   <div class="form-outline mb-4">
-    <input type="email" id="login_field" class="form-control" />
+    <input type="email" id="teacher_field" class="form-control" />
     <label class="form-label" for="login_field">Преподаватель</label>
   </div>
 
   <!-- Password input -->
   <div class="form-outline mb-4">
-    <input type="password" id="password_field" class="form-control" />
+    <input type="password" id="subject_field" class="form-control" />
     <label class="form-label" for="password_field">Предмет</label>
   </div>
 
-  <select name="" id="">
-    <option value="">Зачёт</option>
-    <option value="">Экзамен</option>
+  <select name="" id="type">
+    <option value="Зачёт">Зачёт</option>
+    <option value="Экзамен">Экзамен</option>
   </select>
 
   <!-- 2 column grid layout for inline styling -->
@@ -65,7 +65,7 @@
   </div>
 
   <!-- Submit button -->
-  <button type="button" class="btn btn-primary btn-block mb-4" onclick="auth()">Отправить</button>
+  <button type="button" class="btn btn-primary btn-block mb-4" onclick="sendData()">>Отправить</button>
 
 </form>
 </div>
