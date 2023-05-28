@@ -1,7 +1,6 @@
 from flask import Blueprint, Response, redirect
 
 from src.common.flask_auth import get_current_user_from_cookie
-from src.services import AuthService
 
 pages = Blueprint("pages", __name__)
 

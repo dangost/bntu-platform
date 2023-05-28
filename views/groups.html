@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="/css/bootstrap.css" rel="stylesheet">
     <script src="/js/requests.js"></script>
-    <script src="/js/group.js"></script>
+    <script src="/js/groups.js"></script>
     <title>Главная</title>
 </head>
 <body>
@@ -38,13 +38,13 @@
             <div class="container text-center" style="border: solid 1px; margin-top: 25px">
   <div class="row g-2">
     <div class="col-6">
-      <img src="/img/bntu_main.png" width="400px" style="margin-top: 10px">
+      <img src="/img/bntu_main.png" id="dep_avatar" width="400px" style="margin-top: 10px">
     </div>
     <div class="col-6">
       <div class="p-3">
-          <h5>Кафедра кафедра кафедра</h5>
-          <p>Поисит</p>
-          <p>Описание</p>
+          <h5 id="dep_name">Кафедра кафедра кафедра</h5>
+          <p id="dep_short">Поисит</p>
+          <p id="dep_description">Описание</p>
       </div>
     </div>
   </div>
@@ -52,20 +52,20 @@
         </div>
 
 
-  <div id="groups" class="container text-center" style="max-width: 400px">
-            <div class="container text-center" style="border: solid 1px; margin-top: 25px">
-  <div class="row g-2">
-          <div class="col-6">
-      <div class="p-3">
-          <a href="/group/1"><h5><b>10702119</b></h5></a>
-      </div>
-    </div>
-    <div class="col-6">
-      <div class="p-3">
-          <a href="/users/123"><h6>Алексей</h6></a>
-      </div>
-    </div>
-  </div>
+  <div id="groups" class="container text-center" style="max-width: 800px">
+<div class="container text-center" style="border: solid 1px; margin-top: 25px">
+<div class="row g-2">
+<div class="col-6">
+<div class="p-3">
+<a href="/group/1"><h5><b>10702119</b></h5></a>
+</div>
+</div>
+<div class="col-6">
+<div class="p-3">
+<a href="/users/123"><h6>Алексей</h6></a>
+</div>
+</div>
+</div>
 </div>
 </div>
 

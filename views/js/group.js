@@ -18,6 +18,26 @@ async function init() {
     department.innerHTML = `<a href="/departments/${data.dep_id}">${data.dep_short}</a>`;
     course.innerHTML = data.course;
 
+    let blocks = "<tr>\n" +
+        "<td colspan=\"2\" class=\"identical\">ID</td>\n" +
+        "<th scope=\"col\">Имя фамилия</th>\n" +
+        "<th scope=\"col\">Телефон</th>\n" +
+        "</tr>";
+    for (let i = 0; i < data.students.length; i++) {
+        let student = data.students[i];
+        blocks += `
+<tr>
+<th colspan="2" scope="row">${student.student_id}</th>
+<td>${student.firstname} ${student.surname}</td>
+<td>${student.phone_number}</td>
+</tr>
+        `;
+
+    }
+
+    let table_part = document.getElementById("group_students");
+    table_part.innerHTML = blocks;
+
 }
 
 init()

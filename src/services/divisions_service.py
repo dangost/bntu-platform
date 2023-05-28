@@ -71,9 +71,15 @@ class DivisionsService:
             student_id = row[1]
 
             student_row = self.__db_client.execute(
-                "select s.id, firstname, surname, email, r.name, avatar, phone_number, student_id, course, group_id "
-                "from students s inner join roles r on r.id = s.role_id "
-                f"where student_id = {student_id};"
+                "select s.id, s.firstname, s.surname, s.email, r.name, s.avatar, "
+                "s.phone_number, s.student_id, s.course, s.group_id, d.id, "
+                "d.shortcut, f.id, f.shortcut "
+                "from students s "
+                "inner join roles r on s.role_id = r.id "
+                "inner join groups g on s.group_id = g.id "
+                "inner join department d on g.departament_id = d.id "
+                "inner join faculties f on d.faculty_id = f.id "
+                f"where s.id = {student_id};"
             )
             student = Student.from_row(student_row[0])
             groups.append(Group(id=group_id, leader=student))
