@@ -2,6 +2,7 @@ async function addFile() {
     let input = document.createElement("input");
     input.type = 'file';
 
+
     input.onchange = e => {
         let file = e.target.files[0];
         let filename = file.name;
