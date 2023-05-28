@@ -1,4 +1,5 @@
 from http.cookies import SimpleCookie
+from typing import Optional
 
 from flask import request, current_app as app
 from src.models.user import User
@@ -13,8 +14,10 @@ def get_current_user() -> User:
     return user
 
 
-def get_current_user_from_cookie() -> User:
-    raw_data = request.headers['COOKIE']
+def get_current_user_from_cookie() -> Optional[User]:
+    raw_data = request.headers.get('COOKIE', None)
+    if raw_data is None:
+        return None
     auth_service: AuthService = app.config.auth_service
     simple_cookie = SimpleCookie()
     simple_cookie.load(raw_data)

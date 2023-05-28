@@ -16,10 +16,9 @@ def get_faculties():
     return jsonify(faculties.json)
 
 
-@divisions_api.route("/departments", methods=["GET"])
-def get_departments():
+@divisions_api.route("/departments/<int:faculty_id>", methods=["GET"])
+def get_departments(faculty_id: int):
     # no auth
-    faculty_id = request.args.get("faculty", None)
     if not faculty_id:
         raise DivisionNotFound("Faculty")
 
@@ -42,3 +41,12 @@ def get_groups():
     groups = divisions_service.groups(int(dep_id))
 
     return jsonify(groups.json)
+
+
+@divisions_api.route("/groups/<int:group_id>", methods=['GET'])
+def get_full_group(group_id: int):
+    get_current_user()
+    divisions_service = app.config.divisions_service
+    student = divisions_service.get_group(group_id)
+
+    return jsonify(student.json), 200

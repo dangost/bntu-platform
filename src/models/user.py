@@ -112,7 +112,8 @@ class Teacher(User):
             job_title=row[12],
         )
 
-    def to_json(self) -> dict:
+    @property
+    def json(self) -> dict:
         return {
             "id": self.id,
             "firstname": self.firstname,

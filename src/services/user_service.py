@@ -1,6 +1,7 @@
 import json
 
 from src.common.crypto import sha256
+from src.models.divisions import GroupFullView
 from src.models.files import UserFile
 from src.models.posts import Post, PostContainer, PostUserView
 from src.models.user import User, Student, Teacher

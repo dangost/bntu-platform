@@ -8,7 +8,7 @@
     <link href="/css/post.css" rel="stylesheet">
     <script src="/js/logout.js"></script>
     <script src="/js/requests.js"></script>
-    <script src="/js/teacher_view.js"></script>
+    <script src="/js/group.js"></script>
 </head>
 <body>
         <nav class="navbar navbar-light bg-light">
@@ -18,7 +18,7 @@
             </a>
             <ul class="nav justify-content-end">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/faculties">Университет</a>
+           <a class="nav-link active" aria-current="page" href="/faculties.html">Университет</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/canteens.html">Столовые</a>
@@ -36,44 +36,21 @@
 <div class="container">
 <div class="profile-wrapper">
     <div class="profile-section-user">
-        <div class="profile-info-brief p-3"><img class="ismg-fluid user-profile-avatar" id="user_avatar" src="" alt="" style="margin-top: 70px">
+        <div class="profile-info-brief p-3">
             <div class="text-center">
-                <h5 class="text-uppercase mb-4" style="margin-top: 55px" id="username"></h5>
+                <h5 class="text-uppercase mb-4" style="margin-top: 55px" id="groupname"></h5>
             </div>
         </div>
-        <!-- /.profile-info-brief -->
-        <hr class="m-0">
-        <div class="hidden-sm-down">
-            <hr class="m-0">
-            <div class="profile-info-contact p-4">
-                <h6 class="mb-3">Контакты</h6>
-                <table class="table">
-                    <tbody>
-                        <tr>
-                            <td><strong>Почта:</strong></td>
-                            <td>
-                                <p class="text-muted mb-0" id="user_email"></p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><strong>Телефон:</strong></td>
-                            <td>
-                                <p class="text-muted mb-0" id="user_phone"></p>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
             <!-- /.profile-info-contact -->
             <hr class="m-0">
             <div class="profile-info-general p-4">
                 <h6 class="mb-3">Основная информация</h6>
                 <table class="table">
                     <tbody>
-                        <tr>
-                            <td><strong>Должность:</strong></td>
+                         <tr>
+                            <td><strong>ID:</strong></td>
                             <td>
-                                <p class="text-muted mb-0" id="user_job_title"></p>
+                                <p class="text-muted mb-0" id="group_id"></p>
                             </td>
                         </tr>
                         <tr>
@@ -88,32 +65,16 @@
                                 <p class="text-muted mb-0" id="user_department"></p>
                             </td>
                         </tr>
+                         <tr>
+                            <td><strong>Курс:</strong></td>
+                            <td>
+                                <p class="text-muted mb-0" id="user_course"></p>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
             <!-- /.profile-info-general -->
-            <hr class="m-0">
-        </div>
-        <!-- /.hidden-sm-down -->
-    </div>
-    <!-- /.profile-section-user -->
-    <div class="profile-section-main">
-        <!-- Nav tabs -->
 
-        <div class="tab-content profile-tabs-content">
-            <div class="tab-pane active" id="profile-overview" role="tabpanel">
-                <div class="stream-posts" id="posts_container">
-                        <!-- /.sp-content -->
-                    </div>
-                    <!-- /.stream-post -->
-                </div>
-                <!-- /.stream-posts -->
-            </div>
-        </div>
-        <!-- /.tab-content -->
-    </div>
-    <!-- /.profile-section-main -->
-</div>
-</div>
 </body>
 </html>

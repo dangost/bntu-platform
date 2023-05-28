@@ -20,7 +20,7 @@ def student_page():
     user_service: UserService = app.config.user_service
 
     student = user_service.get_student(user.id)
-    return jsonify(student), 200
+    return jsonify(student.json), 200
 
 
 @users_api.route("/me-teacher", methods=['GET'])
@@ -32,7 +32,17 @@ def teacher_page():
 
     teacher = user_service.get_teacher(user.id)
 
-    return jsonify(teacher), 200
+    return jsonify(teacher.json), 200
+
+
+@users_api.route("/students/<int:student_id>", methods=['GET'])
+def get_student(student_id: int):
+    get_current_user()
+    user_service: UserService = app.config.user_service
+
+    student = user_service.get_student(student_id)
+
+    return jsonify(student.json), 200
 
 
 @users_api.route("/teachers/<int:teacher_id>", methods=['GET'])
@@ -42,7 +52,7 @@ def get_teacher(teacher_id: int):
 
     teacher = user_service.get_teacher(teacher_id)
 
-    return jsonify(teacher), 200
+    return jsonify(teacher.json), 200
 
 
 @users_api.route("/change-password", methods=["POST"])

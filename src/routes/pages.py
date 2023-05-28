@@ -1,5 +1,4 @@
-from http.cookies import SimpleCookie
-from flask import Blueprint, Response, request, current_app as app
+from flask import Blueprint, Response, redirect
 
 from src.common.flask_auth import get_current_user_from_cookie
 from src.services import AuthService
@@ -45,6 +44,8 @@ def user_pages(user_id: int):
 @pages.route("/me", methods=["GET"])
 def me():
     user = get_current_user_from_cookie()
+    if user is None:
+        return redirect("/auth", code=401, Response=None)
     data = ""
     if user.role == 'Student':
         with open(f"views/student.html", "r", encoding="UTF-8") as fs:
@@ -54,6 +55,34 @@ def me():
             data = fs.read()
     response = Response(response=data, status=200, content_type="text/html")
     return response
+
+
+@pages.route("/faculties", methods=['GET'])
+def get_faculties():
+    with open(f"views/faculties.html", "r", encoding="UTF-8") as fs:
+        data = fs.read()
+    return Response(response=data, status=200, content_type="text/html")
+
+
+@pages.route("/departments/<int:faculty_id>", methods=['GET'])
+def get_deps(faculty_id: int):
+    with open(f"views/departments.html", "r", encoding="UTF-8") as fs:
+        data = fs.read()
+    return Response(response=data, status=200, content_type="text/html")
+
+
+@pages.route("/groups/<int:department_id>", methods=['GET'])
+def get_dep_groups(department_id: int):
+    with open(f"views/groups.html", "r", encoding="UTF-8") as fs:
+        data = fs.read()
+    return Response(response=data, status=200, content_type="text/html")
+
+
+@pages.route("/group/<int:group_id>", methods=['GET'])
+def get_group(group_id: int):
+    with open(f"views/group.html", "r", encoding="UTF-8") as fs:
+        data = fs.read()
+    return Response(response=data, status=200, content_type="text/html")
 
 
 @pages.route('/css/<filename>')

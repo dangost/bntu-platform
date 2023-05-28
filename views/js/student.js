@@ -53,11 +53,11 @@ async function init() {
     avatar.src = data.avatar;
 
     studentId.innerHTML = data.student_id;
-    group.innerHTML = `<a href="/groups/${data.group}">${data.group}</a>`
+    group.innerHTML = `<a href="/group/${data.group}">${data.group}</a>`
     email.innerHTML = data.email;
     phone.innerHTML = data.phone_number;
-    faculty.innerHTML = `<a href="/faculty/${data.faculty_id}">${data.faculty_shortname}</a>`;
-    department.innerHTML = `<a href="/departments/${data.departament_id}">${data.dep_shortname}</a>`;
+    faculty.innerHTML = `<a href="/departments/${data.faculty_id}">${data.faculty_shortname}</a>`;
+    department.innerHTML = `<a href="/groups/${data.departament_id}">${data.dep_shortname}</a>`;
     course.innerHTML = data.course;
 
     await loadPosts();

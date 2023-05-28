@@ -1,3 +1,5 @@
+from typing import Optional
+
 from src.exceptions import DivisionNotFound
 from src.models.divisions import (
     FacultiesView,
@@ -5,7 +7,7 @@ from src.models.divisions import (
     GroupsView,
     Faculty,
     Department,
-    Group,
+    Group, GroupFullView,
 )
 from src.models.user import Student
 from src.repositories.db_repo import DatabaseClient
@@ -16,9 +18,8 @@ class DivisionsService:
         self.__db_client = db_client
 
     def faculties(self) -> FacultiesView:
-        rows = self.__db_client.execute(
-            "select id, name, shortcut, avatar, description from faculties"
-        )
+        query = "select id, name, shortcut, avatar, description from faculties"
+        rows = self.__db_client.execute(query)
 
         faculties = [Faculty.from_row(row) for row in rows]
 
@@ -77,3 +78,29 @@ class DivisionsService:
             student = Student.from_row(student_row[0])
             groups.append(Group(id=group_id, leader=student))
         return GroupsView(faculty=faculty, department=department, groups=groups)
+
+    def get_group(self, group_id: int) -> GroupFullView:
+        students_rows = self.__db_client.execute(
+            "select s.id, s.firstname, s.surname, s.email, r.name, s.avatar, "
+            "s.phone_number, s.student_id, s.course, s.group_id, d.id, "
+            "d.shortcut, f.id, f.shortcut "
+            "from students s "
+            "inner join roles r on s.role_id = r.id "
+            "inner join groups g on s.group_id = g.id "
+            "inner join department d on g.departament_id = d.id "
+            "inner join faculties f on d.faculty_id = f.id "
+            f"where s.group_id = {group_id};"
+        )
+
+        group_rows = self.__db_client.execute(
+            "select g.id, l.leader, u.firstname, u.surname, f.id, f.shortcut, "
+            "d.id, d.shortcut, g.course "
+            "from groups g "
+            "inner join leaders l on g.id = l.group_id "
+            "inner join users u on u.id = l.leader "
+            "inner join faculties f on g.faculty_id = f.id "
+            "inner join department d on g.departament_id = d.id "
+            f"where g.id = {group_id};"
+        )
+
+        return GroupFullView.from_row(group_rows[0], students_rows)

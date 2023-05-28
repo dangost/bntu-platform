@@ -56,7 +56,8 @@ $dep_id$ language plpgsql;
 create table groups(
     id int primary key not null unique,
     faculty_id int not null references faculties(id),
-    departament_id int not null references department(id)
+    departament_id int not null references department(id),
+    course int not null
 );
 
 create table users (
@@ -79,8 +80,9 @@ create table students(
 create table leaders(
     id serial primary key,
     group_id int not null references groups(id),
-    leader int not null references students(student_id)
+    leader int not null
 );
+
 
 create table teachers(
     id serial primary key,
@@ -109,10 +111,20 @@ create table posts(
     scope json
 );
 
+create table canteens(
+    id serial primary key ,
+    name text not null,
+    description text not null,
+    address text not null,
+    avatar text not null,
+    current_menu text not null
+);
+
+
 insert into faculties (name, shortcut, description) values ('Факультет Информационных Технолоий и Робототехники', 'ФИТР', 'Просто норм, факультет для пацанов');
 insert into department (name, shortcut, description, faculty_id)
 values('Программное обеспечение информационных систем и технолоий', 'ПОИСиТ', 'Самая пацанская кафедра', get_faculty_by_shortcut('ФИТР'));
-insert into groups (id, faculty_id, departament_id) values (10702119, get_faculty_by_shortcut('ФИТР'), get_dep_by_short('ПОИСиТ'));
+insert into groups (id, faculty_id, departament_id, course) values (10702119, get_faculty_by_shortcut('ФИТР'), get_dep_by_short('ПОИСиТ'), 4);
 insert into students(role_id, firstname, surname, email, password_hash, student_id, course, group_id) values
 (get_role_id('Student'), 'Данила', 'Кислицин', 'fafafa@gmail.com', 'a66b47e6b2fdc5aae2aa914e4718cf2af21f70c7c842ad5ce8b2ac7946840fec', 1070211908, 4, 10702119);
 insert into users(firstname, surname, email, password_hash, role_id) values

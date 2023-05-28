@@ -2,7 +2,7 @@
 async function loadPosts(me){
 
     let posts = await getRequest(
-        "/api/posts/" + userId
+        "/api/posts/" + me.id
     );
     let blocks = "";
 
@@ -34,8 +34,10 @@ async function loadPosts(me){
 }
 
 async function initMainInfo(){
-    alert(document.location)
-    const response = await getRequest('/api/users/3');
+    let slitted_values = document.location.toString().split('/');
+    let userId = slitted_values[slitted_values.length - 1];
+    const response = await getRequest(`/api/users/teachers/${userId}`);
+
     let userAvatar = document.getElementById("user_avatar")
     let userName = document.getElementById("username");
     let userEmail = document.getElementById("user_email")
@@ -57,5 +59,6 @@ async function initMainInfo(){
     await loadPosts(response)
 
 }
+
 
 initMainInfo()
