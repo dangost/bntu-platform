@@ -55,6 +55,16 @@ def get_teacher(teacher_id: int):
     return jsonify(teacher.json), 200
 
 
+@users_api.route("/dep-teachers/<int:dep_id>", methods=['GET'])
+def get_department_teachers(dep_id: int):
+    get_current_user()
+    user_service: UserService = app.config.user_service
+
+    teachers = user_service.department_teachers(dep_id)
+
+    return jsonify([teacher.json for teacher in teachers])
+
+
 @users_api.route("/change-password", methods=["POST"])
 def reset_password():
     user_service: UserService = app.config.user_service

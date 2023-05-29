@@ -33,6 +33,30 @@ async function loadPosts() {
 }
 
 
+async function loadRetakes() {
+    let data = await getRequest("/api/retakes/")
+    let retakesTable = document.getElementById("retakes_table");
+    let blocks = "<tr>\n" +
+        "                        <td><strong>Предмет</strong></td>\n" +
+        "                        <td><strong>Преподаватель</strong></td>\n" +
+        "                        <td><strong>Форма сдачи</strong></td>\n" +
+        "                        <td><strong>Срок действия</strong></td>\n" +
+        "                    </tr>"
+    for (let i = 0; i < data.length; i++) {
+        retake = data[i];
+        blocks += `
+<tr>
+<td>${retake.subject}</td>
+<td><a href="/users/${retake.teacher_id}">${retake.teacher_fullname}</a></td>
+<td>${retake.type}</td>
+<td>${retake.expiration}</td>
+</tr>
+        `
+    }
+    retakesTable.innerHTML = blocks;
+}
+
+
 
 async function init() {
     let data = await getRequest("/api/users/me-student")
@@ -61,7 +85,7 @@ async function init() {
     course.innerHTML = data.course;
 
     await loadPosts();
-
+    await loadRetakes();
 }
 
 init()

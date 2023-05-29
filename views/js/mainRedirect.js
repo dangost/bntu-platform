@@ -5,12 +5,10 @@ async function choosePage(){
         let data = await getRequest("/api/users/me")
         let role = data.role
         let nextPage = "/me";
-        // if (role === "Student"){
-        //     nextPage = '/student.html';
-        // }
-        // else if (role === "Teacher") {
-        //     nextPage = "/teacher.html";
-        // }
+
+        if (role === "Worker") {
+            nextPage = "/canteen-worker"
+        }
         window.location.href = nextPage;
     }
 }

@@ -8,7 +8,7 @@ async function init() {
     let block = "<div class=\"container text-center\" style=\"border: solid 1px; margin-top: 25px\">\n" +
         "  <div class=\"row g-2\">\n" +
         "    <div class=\"col-6\">\n" +
-        `      <a href="/faculties/${faculty.id}"><img src="${avatar}" width="400px" style="margin-top: 10px"></a> \n` +
+        `      <a href="/departments/${faculty.id}"><img src="${avatar}" width="400px" style="margin-top: 10px"></a> \n` +
         "    </div>\n" +
         "    <div class=\"col-6\">\n" +
         "      <div class=\"p-3\">\n" +

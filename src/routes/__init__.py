@@ -6,6 +6,7 @@ from src.routes.divisions import divisions_api
 from src.routes.files import files_api
 from src.routes.pages import pages
 from src.routes.posts import posts_api
+from src.routes.retakes import retakes_api
 from src.routes.schedules import schedules_api
 from src.routes.users import users_api
 
@@ -19,3 +20,4 @@ def init_routes(app: Flask) -> None:
     app.register_blueprint(schedules_api)
     app.register_blueprint(divisions_api)
     app.register_blueprint(canteens_api)
+    app.register_blueprint(retakes_api)

@@ -18,10 +18,10 @@ def get_canteens():
 @canteens_api.route("/update", methods=["POST"])
 def update_menu():
     user = get_current_user()
-    image = request.json().get("image")  # /api/images/1
+    image = request.json.get("image")  # /api/images/1
     canteens_service = app.config.canteens_service
 
-    canteens_service.update_menu(user, image)
+    canteens_service.update_menu(user.id, image)
 
     return jsonify(
         {

@@ -5,10 +5,11 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="./css/bootstrap.css" rel="stylesheet">
-    <script src="./js/requests.js"></script>
-    <script src="./js/auth.js"></script>
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <script src="/js/requests.js"></script>
+    <script src="/js/auth.js"></script>
     <script src="/js/logout.js"></script>
+    <script src="/js/deans_office.js"></script>
     <title>Главная</title>
 </head>
 <body>
@@ -35,7 +36,7 @@
     </nav>
 
 
-<div class="container text-center" style="margin-top: 100px; display: flex; flex-direction: column; align-items: center; flex-wrap: wrap;">
+<div id="main_container" class="container text-center" style="margin-top: 100px; display: flex; flex-direction: column; align-items: center; flex-wrap: wrap;">
 
     <div style="width: 700px;">
         <h3 style="margin-bottom: 100px;" >На данной странице вы можете взять ведомость для пересдачи зачёта или экзамена</h3>
@@ -44,14 +45,14 @@
 <form style="width: 500px;">
   <!-- Email input -->
   <div class="form-outline mb-4">
-    <input type="email" id="teacher_field" class="form-control" />
     <label class="form-label" for="login_field">Преподаватель</label>
+    <input type="text" id="teacher_field" class="form-control" />
   </div>
 
   <!-- Password input -->
   <div class="form-outline mb-4">
-    <input type="password" id="subject_field" class="form-control" />
     <label class="form-label" for="password_field">Предмет</label>
+    <input type="text" id="subject_field" class="form-control" />
   </div>
 
   <select name="" id="type">
@@ -67,7 +68,7 @@
   </div>
 
   <!-- Submit button -->
-  <button type="button" class="btn btn-primary btn-block mb-4" onclick="sendData()">>Отправить</button>
+  <button type="button" class="btn btn-primary btn-block mb-4" onclick="sendData()">Отправить</button>
 
 </form>
 </div>

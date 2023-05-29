@@ -31,7 +31,6 @@ async function addFile() {
                 }
             ).then(async response => {
                 let data = await response.json();
-                alert(data.file_id);
                 let list = document.getElementById("files")
                 list.innerHTML += `<li style="margin-left: 10px" file_id="${data.file_id}"">${filename}</li>`
             })
@@ -70,6 +69,7 @@ async function sendPost() {
             }
         }
     )
+    document.location.reload();
 }
 
 async function loadPosts(me) {

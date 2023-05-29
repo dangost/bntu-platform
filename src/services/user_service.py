@@ -176,3 +176,21 @@ class UserService:
         )
         teacher = Teacher.from_row(teacher_row[0])
         return teacher
+
+    def department_teachers(self, dep_id: int) -> list[Teacher]:
+        teacher_rows = self.__db_client.execute(
+            "select t.id, t.firstname, t.surname, t.email, r.name, t.avatar, t.phone_number, "
+            "d.id, d.shortcut, f.id, f.shortcut, t.schedule, t.job_title "
+            "from teachers t "
+            "inner join roles r on t.role_id = r.id "
+            "inner join department d on t.departament_id = d.id "
+            "inner join faculties f on d.faculty_id = f.id "
+            f"where t.departament_id = {dep_id};"
+        )
+
+        if not teacher_rows:
+            teachers = []
+        else:
+            teachers = [Teacher.from_row(row) for row in teacher_rows]
+
+        return teachers

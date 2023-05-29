@@ -122,6 +122,19 @@ create table canteens(
 );
 
 
+create table retakes(
+    id serial primary key,
+    subject text not null,
+    teacher_id int not null,
+    student_id int not null,
+    type text not null,
+    create_at timestamptz default now(),
+    expire_at timestamptz default now() + interval '5 days'
+);
+
+drop table retakes;
+
+
 insert into faculties (name, shortcut, description) values ('Факультет Информационных Технолоий и Робототехники', 'ФИТР', 'Просто норм, факультет для пацанов');
 insert into department (name, shortcut, description, faculty_id)
 values('Программное обеспечение информационных систем и технолоий', 'ПОИСиТ', 'Самая пацанская кафедра', get_faculty_by_shortcut('ФИТР'));

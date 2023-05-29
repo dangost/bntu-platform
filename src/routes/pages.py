@@ -70,6 +70,20 @@ def canteens_page():
     return Response(response=data, status=200, content_type="text/html")
 
 
+@pages.route("/canteen-worker", methods=['GET'])
+def canteen_worker_page():
+    with open("views/canteen_worker.html", 'r', encoding="UTF-8") as fs:
+        data = fs.read()
+    return Response(response=data, status=200, content_type="text/html")
+
+
+@pages.route("/deans-office", methods=['GET'])
+def deans_office():
+    with open("views/deans_office.html", 'r', encoding="UTF-8") as fs:
+        data = fs.read()
+    return Response(response=data, status=200, content_type="text/html")
+
+
 @pages.route("/departments/<int:faculty_id>", methods=['GET'])
 def get_deps(faculty_id: int):
     with open(f"views/departments.html", "r", encoding="UTF-8") as fs:
