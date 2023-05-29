@@ -41,7 +41,11 @@ class PostUserView:
     avatar: str
 
     def to_json(self) -> dict:
-        return {"user_id": self.user_id, "full_name": self.full_name, "avatar": self.avatar}
+        return {
+            "user_id": self.user_id,
+            "full_name": self.full_name,
+            "avatar": self.avatar,
+        }
 
 
 @dataclass(frozen=True)
@@ -56,7 +60,7 @@ class PostContainer:
             "text": self.text,
             "date": self.date,
             "files": [file.to_json() for file in self.files],
-            "user": self.user.to_json() if self.user else None
+            "user": self.user.to_json() if self.user else None,
         }
 
 

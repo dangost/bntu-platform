@@ -1,5 +1,3 @@
-from typing import Optional
-
 from src.exceptions import DivisionNotFound
 from src.models.divisions import (
     FacultiesView,
@@ -7,7 +5,8 @@ from src.models.divisions import (
     GroupsView,
     Faculty,
     Department,
-    Group, GroupFullView,
+    Group,
+    GroupFullView,
 )
 from src.models.user import Student
 from src.repositories.db_repo import DatabaseClient
@@ -69,23 +68,29 @@ class DivisionsService:
         )
 
         groups = []
-        for row in rows:
-            group_id = row[0]
-            student_id = row[1]
 
-            student_row = self.__db_client.execute(
-                "select s.id, s.firstname, s.surname, s.email, r.name, s.avatar, "
-                "s.phone_number, s.student_id, s.course, s.group_id, d.id, "
-                "d.shortcut, f.id, f.shortcut "
-                "from students s "
-                "inner join roles r on s.role_id = r.id "
-                "inner join groups g on s.group_id = g.id "
-                "inner join department d on g.departament_id = d.id "
-                "inner join faculties f on d.faculty_id = f.id "
-                f"where s.id = {student_id};"
-            )
-            student = Student.from_row(student_row[0])
-            groups.append(Group(id=group_id, leader=student))
+        if rows:
+            for row in rows:
+                group_id = row[0]
+                student_id = row[1]
+
+                student_row = self.__db_client.execute(
+                    "select s.id, s.firstname, s.surname, s.email, r.name, s.avatar, "
+                    "s.phone_number, s.student_id, s.course, s.group_id, d.id, "
+                    "d.shortcut, f.id, f.shortcut "
+                    "from students s "
+                    "inner join roles r on s.role_id = r.id "
+                    "inner join groups g on s.group_id = g.id "
+                    "inner join department d on g.departament_id = d.id "
+                    "inner join faculties f on d.faculty_id = f.id "
+                    f"where s.id = {student_id} and d.id={dep_id};"
+                )
+                if not student_row:
+                    student = None
+                else:
+                    student = Student.from_row(student_row[0])
+
+                groups.append(Group(id=group_id, leader=student))
         return GroupsView(faculty=faculty, department=department, groups=groups)
 
     def get_group(self, group_id: int) -> GroupFullView:

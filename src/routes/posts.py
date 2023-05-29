@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, current_app as app, request
 
 from src.common.flask_auth import get_current_user
+from src.exceptions import UnauthorizedException
 from src.models.posts import Post
 from src.services import UserService
 
@@ -19,11 +20,11 @@ def create_post():
     return jsonify({"status": 200, "message": "OK"}), 200
 
 
-@posts_api.route('/feed', methods=['GET'])
+@posts_api.route("/feed", methods=["GET"])
 def get_student_feed():
     user = get_current_user()
     if user.role != "Student":
-        raise Exception("User is not student")
+        raise UnauthorizedException()
     user_service: UserService = app.config.user_service
     posts = user_service.get_student_feed(user.id)
 

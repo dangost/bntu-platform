@@ -10,13 +10,11 @@ class CanteensService:
         canteens = self.__db_client.execute(
             "select id, name, description, address, avatar, current_menu from canteens;"
         )
-
+        if not canteens:
+            return []
         return [Canteen.from_row(row) for row in canteens]
 
     def update_menu(self, admin: str, image: str) -> None:
         self.__db_client.execute(
-            f"update canteens set current_menu='{image}' where admin = {admin};"
+            f"update canteens set current_menu='{image}' where admin = {admin};", commit=True
         )
-
-        return None
-

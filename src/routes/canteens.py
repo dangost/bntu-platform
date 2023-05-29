@@ -23,9 +23,4 @@ def update_menu():
 
     canteens_service.update_menu(user.id, image)
 
-    return jsonify(
-        {
-            "status": 200,
-            "message": "OK"
-        }
-    )
+    return jsonify({"status": 200, "message": "OK"})

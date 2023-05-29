@@ -75,11 +75,12 @@ function output_teachers() {
 <table>
 <tr>
 <td><h6>${job_title}</h6></td>
-<td><h6>${fullname}</h6></td>
+<td><a href="/users/${teacher.id}"><h6>${fullname}</h6></a></td>
 <td><h6>${phone}</h6></td>
 <td><img src="${avatar}" style="max-width: 100px"></td>
 </tr>
 </table>
+</div>
 </div>
 </div>
 `

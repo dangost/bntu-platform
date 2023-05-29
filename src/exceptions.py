@@ -86,9 +86,11 @@ class PostNotFound(ServiceException):
     def __init__(self):
         self.code = 404
         self.message = "Post not found"
+        super().__init__(self.code, self.message)
 
 
 class TeacherNotFound(ServiceException):
     def __init__(self):
         self.code = 404
         self.message = "Teacher not found"
+        super().__init__(self.code, self.message)

@@ -13,7 +13,9 @@ class RetakesService:
     def get_teacher_retakes(self, teacher_id: int) -> list[Retake]:
         return self.__get_retake_sql(f"t.id={teacher_id}")
 
-    def __get_retake_sql(self, where: str) -> list[Retake]:  # where = "t.id={teacher_id}"
+    def __get_retake_sql(
+        self, where: str
+    ) -> list[Retake]:  # where = "t.id={teacher_id}"
         rows = self.__db_client.execute(
             "select r.id, r.subject, r.type, t.id, t.firstname, t.surname, "
             "s.id, s.firstname, s.surname, to_char(r.expire_at, 'DD/MM') "
@@ -22,7 +24,8 @@ class RetakesService:
             "inner join teachers t on r.teacher_id = t.id "
             f"where expire_at > now() and {where};"
         )
-
+        if not rows:
+            return []
         return [Retake.from_row(row) for row in rows]
 
     def create_retake(self, user_id: int, retake: RetakeBody) -> None:
@@ -42,5 +45,5 @@ class RetakesService:
         self.__db_client.execute(
             "insert into retakes(subject, teacher_id, student_id, type)"
             f"values ('{retake.subject}', {teacher_id}, {user_id}, '{retake.type}')",
-            commit=True
+            commit=True,
         )

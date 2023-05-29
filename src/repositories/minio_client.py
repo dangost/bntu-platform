@@ -24,6 +24,7 @@ class MinioClient:
         self,
         access_key: str,
         secret_key: str,
+        base_url: str = "127.0.0.1",
         host: str = "127.0.0.1",
         port: int = 9000,
     ):
@@ -33,6 +34,8 @@ class MinioClient:
             secret_key=secret_key,
             secure=False,
         )
+
+        self.__base_url = base_url
 
         if not self.__client.bucket_exists("data"):
             self.__client.make_bucket("data")
@@ -81,6 +84,7 @@ class MinioClient:
             url = self.__client.get_presigned_url(
                 "GET", "data", path, expires=timedelta(hours=12)
             )
+            url = str(url).replace("minio", self.__base_url)
         except S3Error as e:
             raise S3ImageNotFound(str(e))
         return url

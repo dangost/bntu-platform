@@ -43,7 +43,7 @@ def get_groups():
     return jsonify(groups.json)
 
 
-@divisions_api.route("/groups/<int:group_id>", methods=['GET'])
+@divisions_api.route("/groups/<int:group_id>", methods=["GET"])
 def get_full_group(group_id: int):
     get_current_user()
     divisions_service = app.config.divisions_service

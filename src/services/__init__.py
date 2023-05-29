@@ -27,6 +27,7 @@ def init_services(app: Flask, config: Config) -> None:
         secret_key=config.minio_config.secret_key,
         host=config.minio_config.host,
         port=config.minio_config.port,
+        base_url=config.server_config.server_url
     )
 
     app.config.auth_service = AuthService(db_client, config.server_config.jwt_secret)

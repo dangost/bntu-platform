@@ -18,7 +18,7 @@ class Canteen:
             description=row[2],
             address=row[3],
             avatar=row[4],
-            current_menu=row[5]
+            current_menu=row[5],
         )
 
     @property
@@ -29,5 +29,5 @@ class Canteen:
             "description": self.description,
             "address": self.address,
             "avatar": self.avatar,
-            "current_menu": self.current_menu
+            "current_menu": self.current_menu,
         }

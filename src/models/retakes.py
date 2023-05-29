@@ -10,9 +10,9 @@ class RetakeBody:
     @classmethod
     def from_json(cls, body: dict):
         return RetakeBody(
-            subject=body.get('subject'),
-            type=body.get('type'),
-            teacher=body.get('teacher')
+            subject=body.get("subject"),
+            type=body.get("type"),
+            teacher=body.get("teacher"),
         )
 
 
@@ -50,5 +50,5 @@ class Retake:
             "teacher_fullname": self.teacher_fullname,
             "student_id": self.student_id,
             "student_fullname": self.student_fullname,
-            "expiration": self.expiration
+            "expiration": self.expiration,
         }

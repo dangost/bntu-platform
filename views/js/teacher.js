@@ -124,8 +124,8 @@ async function initMainInfo(){
     userPhone.innerHTML = response.phone_number;
 
     job.innerHTML = response.job_title;
-    faculty.innerHTML = `<a href="/facutlies/${response.faculty_id}">${response.faculty_shortname}</a>`
-    dep.innerHTML = `<a href="/departments/${response.departament_id}">${response.departament_name}</a>`
+    faculty.innerHTML = `<a href="/departments/${response.faculty_id}">${response.faculty_shortname}</a>`
+    dep.innerHTML = `<a href="/groups/${response.departament_id}">${response.departament_name}</a>`
 
     await loadPosts(response)
 

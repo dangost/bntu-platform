@@ -8,6 +8,7 @@ SERVER_HOST = "SERVER_HOST"
 SERVER_PORT = "SERVER_PORT"
 SERVER_JWT_SECRET = "SERVER_JWT_SECRET"
 SERVER_WORKERS = "SERVER_WORKERS"
+SERVER_URL = "SERVER_URL"
 
 # DATABASE ENVS
 DB_HOST = "DB_HOST"
@@ -31,8 +32,8 @@ class ServerConfig:
         self.host = string_env(SERVER_HOST, default="0.0.0.0")
         self.port = int_env(SERVER_PORT, default=28755)
         self.jwt_secret = string_env(SERVER_JWT_SECRET)
+        self.server_url = string_env(SERVER_URL)
         self.workers = int_env(SERVER_WORKERS, default=1)
-
         if not self.jwt_secret:
             raise JWTSecretNotExists()
 

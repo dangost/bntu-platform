@@ -21,7 +21,7 @@ class User:
             email=row[3],
             role=row[4],
             avatar=row[5],
-            phone_number=row[6]
+            phone_number=row[6],
         )
 
     def to_json(self) -> dict:
@@ -32,7 +32,7 @@ class User:
             "email": self.email,
             "role": self.role,
             "phone_number": self.phone_number,
-            "avatar": self.avatar
+            "avatar": self.avatar,
         }
 
 
@@ -62,7 +62,7 @@ class Student(User):
             departament_id=row[10],
             dep_shortname=row[11],
             faculty_id=row[12],
-            faculty_shortname=row[13]
+            faculty_shortname=row[13],
         )
 
     @property
@@ -81,7 +81,7 @@ class Student(User):
             "departament_id": self.departament_id,
             "dep_shortname": self.dep_shortname,
             "faculty_id": self.faculty_id,
-            "faculty_shortname": self.faculty_shortname
+            "faculty_shortname": self.faculty_shortname,
         }
 
 

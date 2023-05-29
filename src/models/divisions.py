@@ -32,11 +32,11 @@ class Division:
 @dataclass(frozen=True)
 class Group:
     id: int
-    leader: Student
+    leader: Optional[Student]
 
     @property
     def json(self) -> dict:
-        return {"id": self.id, "leader": self.leader.json}
+        return {"id": self.id, "leader": self.leader.json if self.leader else None}
 
 
 @dataclass(frozen=True)
@@ -62,7 +62,9 @@ class GroupFullView:
             dep_id=row[6],
             dep_short=row[7],
             course=row[8],
-            students=[Student.from_row(s_row) for s_row in students_rows] if students_rows else [],
+            students=[Student.from_row(s_row) for s_row in students_rows]
+            if students_rows
+            else [],
         )
 
     @property
@@ -76,7 +78,9 @@ class GroupFullView:
             "dep_id": self.dep_id,
             "dep_short": self.dep_short,
             "course": self.course,
-            "students": [student.json for student in self.students] if self.students else []
+            "students": [student.json for student in self.students]
+            if self.students
+            else [],
         }
 
 

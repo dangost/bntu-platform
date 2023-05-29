@@ -1,12 +1,16 @@
 import json
 
 from src.common.crypto import sha256
-from src.models.divisions import GroupFullView
 from src.models.files import UserFile
 from src.models.posts import Post, PostContainer, PostUserView
 from src.models.user import User, Student, Teacher
 from src.repositories.db_repo import DatabaseClient
-from src.exceptions import IncorrectCurrentPassword, PostBodyIsEmpty, S3FileNotFound, PostNotFound
+from src.exceptions import (
+    IncorrectCurrentPassword,
+    PostBodyIsEmpty,
+    S3FileNotFound,
+    PostNotFound,
+)
 from src.repositories.minio_client import MinioClient
 
 
@@ -57,7 +61,7 @@ class UserService:
             commit=True,
         )
 
-    def get_user_posts(self, visitor: User, user_id: int) -> list[PostContainer]:
+    def get_user_posts(self, visitor: User, _user_id: int) -> list[PostContainer]:
         if visitor.role == "Student":
             group = self.__db_client.execute(
                 f"select group_id from students where id = {visitor.id};",
@@ -69,9 +73,10 @@ class UserService:
             group = None
 
         results = self.__db_client.execute(
-            f"select container, scope, datetime, users.firstname, users.surname, users.id, users.avatar from posts "
+            f"select container, scope, datetime, users.firstname, "
+            f"users.surname, users.id, users.avatar from posts "
             "inner join users on posts.user_id = users.id "
-            f"where user_id={user_id} order by datetime desc"
+            f"where user_id={_user_id} order by datetime desc"
         )
 
         if not results:
@@ -97,21 +102,26 @@ class UserService:
                 date = date.strftime("%d/%m %H:%M")
                 posts.append(
                     PostContainer(
-                        text=text, files=files, date=date,
-                        user=PostUserView(user_id=user_id, full_name=f"{user_name} {surname}", avatar=avatar)
+                        text=text,
+                        files=files,
+                        date=date,
+                        user=PostUserView(
+                            user_id=user_id,
+                            full_name=f"{user_name} {surname}",
+                            avatar=avatar,
+                        ),
                     )
                 )
         return posts
 
     def get_student_feed(self, student_id: int) -> list[PostContainer]:
         group_id = self.__db_client.execute(
-                f"select group_id from students where id = {student_id};",
-                return_function=lambda r: r[0][0]
-                if len(r) > 0 and len(r[0]) > 0
-                else None,
-            )
+            f"select group_id from students where id = {student_id};",
+            return_function=lambda r: r[0][0] if len(r) > 0 and len(r[0]) > 0 else None,
+        )
         results = self.__db_client.execute(
-            "select container, scope, datetime, users.firstname, users.surname, users.id, users.avatar "
+            "select container, scope, datetime, users.firstname,"
+            " users.surname, users.id, users.avatar "
             "from posts "  # oaoaoaoaoaoaoao eto pizdec :((((
             "inner join users on posts.user_id = users.id "
             "order by datetime desc"
@@ -139,10 +149,12 @@ class UserService:
             full_name = user_name + " " + surname
             posts.append(
                 PostContainer(
-                    text=text, files=files, date=date,
+                    text=text,
+                    files=files,
+                    date=date,
                     user=PostUserView(
                         user_id=user_id, full_name=full_name, avatar=avatar
-                    )
+                    ),
                 )
             )
         return posts
