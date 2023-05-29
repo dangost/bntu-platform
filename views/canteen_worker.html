@@ -9,26 +9,26 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
-        <nav class="navbar navbar-light bg-light">
+  <nav class="navbar navbar-light bg-light">
 
-            <a class="navbar-brand" href="/" style="margin-left: 30px">
-                <img src="./img/logo_BNTU.png" width=70 class="d-inline-block align-top" alt="Логотип БНТУ">
-            </a>
-            <ul class="nav justify-content-end">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="./faculties">Университет</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="./canteens.html">Столовые</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Деканат</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" onclick="logout()">Выйти</a>
-          </li>
-        </ul>
-        </nav>
+    <a class="navbar-brand" href="/" style="margin-left: 30px">
+        <img src="/img/logo_BNTU.png" width=70 class="d-inline-block align-top" alt="Логотип БНТУ">
+    </a>
+    <ul class="nav justify-content-end">
+  <li class="nav-item">
+   <a class="nav-link active" aria-current="page" href="/faculties">Университет</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/canteens">Столовые</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/dean's_office">Деканат</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" onclick="logout()">Выйти</a>
+  </li>
+</ul>
+</nav>
 
 
 <div class="container">
@@ -41,9 +41,9 @@
         <div class="tab-content profile-tabs-content">
             <div class="tab-pane active" id="profile-overview" role="tabpanel">
                 <div class="post-editor post_post">
-                       <div> 
+                       <div>
                         <img src="../views/img/sidorik.jpg" width="200px" alt="">
-                       </div> 
+                       </div>
                     <div class="d-flex">
                         <button class="btn btn-success px-4 py-1" onclick="sendPost()">Отправить</button>
                         <button class="btn btn-success px-4 py-1" style="margin-left:10px" onclick="addFile()">Добавить фото</button>

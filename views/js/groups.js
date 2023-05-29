@@ -20,7 +20,7 @@ async function init() {
         let group = data.groups[i];
         let group_id = group.id;
         let leader_fullname = group.leader.firstname + " " + group.leader.surname;
-        let course = group.leader.course;
+        let course = group.leader.course + " курс";
         let phone = group.leader.phone_number;
         let avatar = group.leader.avatar;
         blocks += `
@@ -31,7 +31,7 @@ async function init() {
 <table>
 <tr>
 <td><a href="/group/${group_id}"><h5><b>${group_id}</b></h5></a></td>
-<td><h6>${course} курс</h6></td>
+<td><h6>${course}</h6></td>
 <td><h6>${leader_fullname}</h6></td>
 <td><h6>${phone}</h6></td>
 <td><img src="${avatar}" style="max-width: 50px"></td>
