@@ -31,7 +31,7 @@ async function init() {
 <td>${student.firstname} ${student.surname}</td>
 <td>${student.phone_number}</td>
 </tr>
-        `;
+`;
 
     }
 
