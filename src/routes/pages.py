@@ -63,6 +63,13 @@ def get_faculties():
     return Response(response=data, status=200, content_type="text/html")
 
 
+@pages.route("/canteens", methods=['GET'])
+def canteens_page():
+    with open("views/canteens.html", 'r', encoding="UTF-8") as fs:
+        data = fs.read()
+    return Response(response=data, status=200, content_type="text/html")
+
+
 @pages.route("/departments/<int:faculty_id>", methods=['GET'])
 def get_deps(faculty_id: int):
     with open(f"views/departments.html", "r", encoding="UTF-8") as fs:

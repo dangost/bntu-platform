@@ -39,7 +39,10 @@ class DivisionsService:
             f"from department where faculty_id={faculty_id};"
         )
 
-        departments = [Department.from_row(row) for row in rows]
+        if rows:
+            departments = [Department.from_row(row) for row in rows]
+        else:
+            departments = []
 
         return DepartmentsView(faculty=faculty, departments=departments)
 
