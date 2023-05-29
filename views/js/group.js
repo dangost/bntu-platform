@@ -14,8 +14,8 @@ async function init() {
     group_id.innerHTML = data.id;
     group_id_lower.innerHTML = data.id;
 
-    faculty.innerHTML = `<a href="/faculty/${data.faculty_id}">${data.faculty_short}</a>`;
-    department.innerHTML = `<a href="/departments/${data.dep_id}">${data.dep_short}</a>`;
+    faculty.innerHTML = `<a href="/departments/${data.faculty_id}">${data.faculty_short}</a>`;
+    department.innerHTML = `<a href="/groups/${data.dep_id}">${data.dep_short}</a>`;
     course.innerHTML = data.course;
 
     let blocks = "<tr>\n" +
