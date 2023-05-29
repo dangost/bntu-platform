@@ -117,7 +117,8 @@ create table canteens(
     description text not null,
     address text not null,
     avatar text not null,
-    current_menu text not null
+    current_menu text not null,
+    admin int not null unique
 );
 
 
@@ -131,5 +132,4 @@ insert into users(firstname, surname, email, password_hash, role_id) values
 ('Dan', 'Gost', 'dangost16@gmail.com', 'f74b4df676be77106dd1ebecf3bd1657f1b8973858f92878184e41eb488ab9bd', get_role_id('Admin'));
 insert into teachers (firstname, surname, email, password_hash, role_id, departament_id, job_title)
 values ('Ирина', 'Ковалёва', 'ilkovaleva@bntu.by', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', get_role_id('Teacher'), get_dep_by_short('ПОИСиТ'), 'Доцент')
-
 

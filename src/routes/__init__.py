@@ -1,6 +1,7 @@
 from flask import Flask
 
 from src.routes.auth import auth_api
+from src.routes.canteens import canteens_api
 from src.routes.divisions import divisions_api
 from src.routes.files import files_api
 from src.routes.pages import pages
@@ -17,3 +18,4 @@ def init_routes(app: Flask) -> None:
     app.register_blueprint(posts_api)
     app.register_blueprint(schedules_api)
     app.register_blueprint(divisions_api)
+    app.register_blueprint(canteens_api)
