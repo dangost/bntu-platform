@@ -364,3 +364,7 @@ caption {
     flex-direction: column;
     align-items: center;
 }
+
+.mainiel {
+    display: flex;
+}
